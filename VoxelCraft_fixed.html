@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
-<title>VoxelCraft</title>
-<meta name="description" content="Full 3D voxel survival and creative sandbox game in a single HTML file with procedural biomes, mining, crafting, smelting, farming, dynamic weather, animals, and night mobs." />
+<title>VoxelCraft — Realistic Water Edition</title>
+<meta name="description" content="Voxel survival sandbox with smooth procedural water, natural wave normals, fresnel reflections, depth tinting, biomes, mining, crafting, farming, weather and mobs." />
 <meta property="og:title" content="VoxelCraft" />
 <meta property="og:description" content="Full 3D voxel survival and creative sandbox game in a single HTML file with procedural biomes, mining, crafting, smelting, farming, dynamic weather, animals, and night mobs." />
 <meta property="og:type" content="website" />
@@ -243,6 +243,106 @@
   #b-inv { right: calc(150px + env(safe-area-inset-right)); bottom: 84px; width: 48px; height: 48px; }
   #b-eat { right: calc(150px + env(safe-area-inset-right)); bottom: 140px; width: 48px; height: 48px; }
   #b-sneak { left: calc(150px + env(safe-area-inset-left)); bottom: 100px; width: 48px; height: 48px; }
+
+
+/* VoxelCraft Ultimate Fusion — visual system */
+:root{--ui-bg:rgba(8,15,24,.84);--ui-line:rgba(195,221,237,.20);--ui-text:#edf5fa;--ui-muted:#9fb1bd;--ui-accent:#a8e66d;--ui-blue:#68c9d9}
+#game-controls{gap:6px;align-items:center;flex-wrap:wrap;justify-content:flex-end;max-width:min(80vw,820px)}
+.game-btn{border:1px solid rgba(218,239,248,.22);border-radius:7px;background:rgba(8,16,25,.82);backdrop-filter:blur(14px);padding:9px 12px;font-size:10px;letter-spacing:.7px;transition:background .18s,border-color .18s,transform .18s}
+.game-btn:hover{background:rgba(52,91,62,.94);border-color:rgba(168,230,109,.6);transform:translateY(-1px)}
+#save-status{top:52px;right:14px;padding:6px 10px;border:1px solid var(--ui-line);border-radius:6px;background:var(--ui-bg);backdrop-filter:blur(10px)}
+#weather-indicator{border:1px solid var(--ui-line);border-radius:7px;background:var(--ui-bg);backdrop-filter:blur(14px);letter-spacing:.5px}
+#world-card{position:fixed;top:58px;left:12px;z-index:16;width:238px;padding:12px 14px;border:1px solid var(--ui-line);border-radius:10px;background:linear-gradient(145deg,rgba(10,20,31,.90),rgba(16,32,43,.74));color:var(--ui-text);backdrop-filter:blur(16px);box-shadow:0 12px 35px rgba(0,0,0,.22);pointer-events:none;font-family:ui-sans-serif,system-ui,Segoe UI,sans-serif}
+.world-eyebrow,.panel-kicker{font-size:9px;font-weight:800;letter-spacing:1.7px;color:var(--ui-accent)}
+#world-biome{font-size:17px;font-weight:800;margin:4px 0 7px;text-shadow:0 2px 14px rgba(0,0,0,.4);text-transform:capitalize}
+.world-meta{display:flex;justify-content:space-between;gap:8px;color:#bdcbd3;font:10px ui-monospace,Consolas,monospace;margin-top:5px}
+#world-seed{opacity:.64}#world-weather{color:#a7dce9}
+.world-quest{margin-top:8px;padding-top:7px;border-top:1px solid rgba(220,240,245,.10);font:10px ui-sans-serif,system-ui,sans-serif;color:#c8e8a9;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#minimap-frame{position:fixed;left:12px;top:184px;z-index:16;width:166px;padding:9px;border:1px solid var(--ui-line);border-radius:10px;background:rgba(8,16,25,.80);backdrop-filter:blur(12px);box-shadow:0 10px 30px rgba(0,0,0,.22);pointer-events:none;color:#dce9ef;font-family:ui-sans-serif,system-ui,sans-serif}
+.map-head,.map-foot{display:flex;justify-content:space-between;align-items:center;font:9px ui-monospace,Consolas,monospace;letter-spacing:1px;color:#a9c1ce;padding:0 2px 6px}
+#minimap{display:block;width:144px;height:144px;border-radius:6px;background:#111c27;image-rendering:pixelated}
+.map-foot{padding:6px 2px 0;justify-content:center;color:#cde0e8;font-size:9px;letter-spacing:.5px}
+#hud-bottom{align-items:center;gap:5px;bottom:12px}
+#status-bars{filter:drop-shadow(0 2px 3px #000)}
+#xp-meta{width:min(440px,92vw);display:flex;justify-content:space-between;align-self:center;padding:0 3px 4px;color:#e8f1f6;font:10px ui-monospace,Consolas,monospace;text-shadow:1px 2px #000}
+#xp-level{position:static;left:auto;top:auto;transform:none;color:#baf17c;font:700 10px ui-monospace,Consolas,monospace;text-shadow:1px 1px #000}
+#xp-count{color:#d5e4eb}
+#xp-wrap{width:min(440px,92vw);height:7px;align-self:center;background:rgba(0,0,0,.68);border:1px solid #000;border-radius:8px;overflow:hidden;box-shadow:0 2px 6px #0008}
+#xp-fill{height:100%;background:linear-gradient(90deg,#62b84b,#c7f17b);box-shadow:0 0 10px #9be45e66;transition:width .25s}
+#hotbar{border:1px solid rgba(255,255,255,.38);border-radius:8px;padding:4px;gap:4px;background:rgba(7,12,18,.78);backdrop-filter:blur(9px)}
+.slot{border-radius:3px;background:linear-gradient(145deg,#6b747b,#343b43);border:2px solid #222b31;box-shadow:inset 1px 1px 0 #b5c1c7,inset -1px -1px 0 #171c20}
+.slot.selected{outline:2px solid #d9f7b4;box-shadow:0 0 0 3px #7fbd4c88,0 0 15px #b3f17899;transform:translateY(-2px) scale(1.04)}
+#item-label{font-family:ui-sans-serif,system-ui,sans-serif;letter-spacing:.25px}
+#blocker{background:radial-gradient(ellipse at 50% 40%,rgba(23,56,54,.38),rgba(2,7,13,.91) 70%),linear-gradient(140deg,rgba(5,14,24,.80),rgba(3,8,13,.96));backdrop-filter:blur(5px)}
+#blocker h1{font-size:clamp(40px,6vw,68px);letter-spacing:7px;color:#d1ff9a;text-shadow:0 0 28px #8ee45c55,4px 5px 0 #18231c}
+#blocker .subtitle{max-width:700px;padding:15px 18px;border:1px solid rgba(202,235,237,.16);border-radius:10px;background:rgba(4,14,22,.52);font:13px/1.85 ui-sans-serif,system-ui,sans-serif;color:#d0dce2}
+#blocker .menu-panel{border:1px solid rgba(202,235,237,.18);border-radius:12px;background:rgba(4,14,22,.74);box-shadow:0 12px 34px #0007}
+#play-btn{border:1px solid #b6f184;border-radius:8px;background:linear-gradient(135deg,#83c84c,#3f852d);box-shadow:0 7px 25px #67b94744,inset 0 1px 0 #d0ff9b;padding:15px 42px;font-size:14px;letter-spacing:2px}
+#play-btn:hover{background:linear-gradient(135deg,#a2e66b,#579e39)}
+.overlay-modal{position:fixed;inset:0;z-index:80;display:none;align-items:center;justify-content:center;padding:16px;background:rgba(1,6,11,.78);backdrop-filter:blur(12px);color:var(--ui-text);font-family:ui-sans-serif,system-ui,Segoe UI,sans-serif}
+.panel-window{width:min(540px,calc(100vw - 28px));max-height:min(88vh,780px);overflow:auto;padding:26px;border:1px solid rgba(201,233,242,.22);border-radius:16px;background:linear-gradient(145deg,rgba(17,31,43,.98),rgba(7,16,26,.98));box-shadow:0 30px 90px rgba(0,0,0,.55),inset 0 1px rgba(255,255,255,.05)}
+.panel-window h2{margin:5px 0 8px;font-size:28px;letter-spacing:-.7px;color:#f1f7fa}.panel-window p{margin:0 0 18px;color:var(--ui-muted);font-size:13px;line-height:1.6}
+.panel-hint{margin-top:18px;text-align:center;font:10px ui-monospace,Consolas,monospace;color:#8ea4b0}
+.panel-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:20px}
+.panel-window button{flex:1;min-width:115px;padding:12px 14px;border:1px solid rgba(198,225,238,.2);border-radius:8px;background:rgba(255,255,255,.055);color:#e8f2f6;font:700 10px ui-sans-serif,system-ui,sans-serif;letter-spacing:.9px;cursor:pointer}
+.panel-window button:hover{background:rgba(137,194,109,.16);border-color:#9be45e88}
+.panel-window button.primary-action{background:linear-gradient(135deg,#8acb56,#4f9235);border-color:#b1e77e;color:#10200d}
+.setting-row{display:grid;grid-template-columns:1fr minmax(110px,170px) 54px;align-items:center;gap:12px;padding:13px 0;border-top:1px solid rgba(218,237,245,.10)}
+.setting-row b{display:block;font-size:12px}.setting-row small{display:block;color:#8fa4b0;font-size:10px;margin-top:3px}.setting-row input{width:100%;accent-color:#9be45e}.setting-row output{font:10px ui-monospace,Consolas,monospace;color:#c9e7b1;text-align:right}.setting-row select{width:100%;padding:8px;background:#1c2a35;color:#eaf2f5;border:1px solid #50616a;border-radius:6px}
+.journal-window{width:min(650px,calc(100vw - 28px))}.journal-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:14px 0 20px}.journal-stat{padding:11px;border:1px solid var(--ui-line);border-radius:8px;background:rgba(255,255,255,.035)}.journal-stat b{display:block;font:700 19px ui-monospace,Consolas,monospace;color:#c7f28e}.journal-stat span{display:block;margin-top:3px;color:#91a7b2;font-size:9px;text-transform:uppercase;letter-spacing:.6px}
+.quest-row{padding:13px 12px;margin:8px 0;border:1px solid rgba(212,234,242,.12);border-radius:9px;background:rgba(255,255,255,.035)}.quest-top{display:flex;justify-content:space-between;gap:12px;font-size:12px;font-weight:800}.quest-top em{font:10px ui-monospace,Consolas,monospace;color:#a8cc8d;font-style:normal}.quest-row p{font-size:10px;margin:4px 0 8px}.quest-track{height:5px;background:#02080d;border-radius:5px;overflow:hidden}.quest-track i{display:block;height:100%;background:linear-gradient(90deg,#4d9a44,#c3ec81)}
+#quest-toast{position:fixed;left:50%;top:17%;z-index:90;transform:translate(-50%,-10px);opacity:0;pointer-events:none;padding:13px 18px;border:1px solid #a9e77b77;border-radius:10px;background:rgba(9,24,21,.96);color:#eeffe2;box-shadow:0 10px 35px #0007;transition:opacity .25s,transform .25s;text-align:center;font:700 11px ui-sans-serif,system-ui,sans-serif;letter-spacing:.5px;max-width:calc(100vw - 30px)}
+#quest-toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:800px){#game-controls{top:7px;right:7px;max-width:96vw;gap:4px}.game-btn{padding:7px 8px;font-size:9px}#settings-btn{display:none}#world-card{top:53px;left:8px;width:190px;padding:9px 10px}#world-biome{font-size:14px}#minimap-frame{top:166px;left:8px;width:128px;padding:7px}#minimap{width:112px;height:112px}.map-head,.map-foot{font-size:8px}#weather-indicator{top:auto;bottom:155px;left:8px;font-size:10px}#hud-bottom{bottom:7px;transform:translateX(-50%) scale(.82);transform-origin:bottom center}body.touch #hud-bottom{transform:translateX(-50%) scale(.62);bottom:4px}#save-status{top:52px;right:8px;font-size:10px}.panel-window{padding:19px}.journal-stats{grid-template-columns:repeat(2,1fr)}.setting-row{grid-template-columns:1fr 110px 48px}}
+@media(max-height:650px){#world-card{transform:scale(.86);transform-origin:top left}#minimap-frame{transform:scale(.82);transform-origin:top left}#blocker{justify-content:flex-start;padding-top:14px}#blocker .menu-panel{padding:10px 14px;margin-bottom:8px}#blocker .subtitle{margin-bottom:8px;padding:8px 12px}}
+
+
+
+/* Minecraft-inspired mobile touch controls: fewer, contextual buttons. */
+#touch-ui{z-index:35;pointer-events:none;--touch-btn-scale:1;--joy-alpha:.42}
+#touch-ui button{touch-action:none;-webkit-tap-highlight-color:transparent}
+#joy{left:calc(22px + env(safe-area-inset-left));bottom:104px;width:132px;height:132px;border-radius:50%;background:rgba(235,245,250,var(--joy-alpha));border:2px solid rgba(255,255,255,.34);box-shadow:0 5px 22px rgba(0,0,0,.20);backdrop-filter:blur(3px);pointer-events:auto;touch-action:none}
+#joy i{left:39px;top:39px;width:50px;height:50px;border:1px solid rgba(255,255,255,.38);background:rgba(247,251,255,.56);box-shadow:0 3px 12px rgba(0,0,0,.22);transition:background .1s}
+.touch-orb{position:absolute;display:flex;align-items:center;justify-content:center;border:2px solid rgba(255,255,255,.58);border-radius:50%;color:#fff;background:rgba(27,39,48,.48);box-shadow:0 4px 18px rgba(0,0,0,.28),inset 0 1px rgba(255,255,255,.20);font:800 27px ui-sans-serif,system-ui,sans-serif;text-shadow:0 2px 4px #000;pointer-events:auto;transform:scale(var(--touch-btn-scale));backdrop-filter:blur(4px)}
+.touch-orb:active,.touch-orb.on{background:rgba(79,145,54,.90);border-color:#d8ffb5}
+.touch-jump{right:calc(24px + env(safe-area-inset-right));bottom:42px;width:68px;height:68px;font-size:30px}
+.touch-sneak{right:calc(102px + env(safe-area-inset-right));bottom:48px;width:48px;height:48px;font-size:20px;background:rgba(27,39,48,.40)}
+.touch-sneak.on{background:rgba(61,126,48,.92);border-color:#d8ffb5}
+.touch-action{display:none;right:calc(28px + env(safe-area-inset-right));bottom:126px;width:66px;height:66px;font-size:11px;letter-spacing:.4px}
+body.touch-crosshair .touch-action{display:flex}
+.touch-top-button{position:absolute;top:62px;right:calc(12px + env(safe-area-inset-right));width:42px;height:42px;border:1px solid rgba(255,255,255,.38);border-radius:9px;background:rgba(10,20,29,.64);color:#fff;font:700 22px ui-sans-serif,system-ui,sans-serif;box-shadow:0 4px 16px #0004;pointer-events:auto;backdrop-filter:blur(8px)}
+.touch-top-button:active{background:rgba(83,142,56,.9)}
+.touch-tip{position:absolute;left:50%;top:calc(50% + 22px);transform:translateX(-50%);padding:4px 8px;border-radius:5px;background:rgba(0,0,0,.25);color:rgba(255,255,255,.48);font:700 8px ui-monospace,monospace;letter-spacing:1px;white-space:nowrap;pointer-events:none;opacity:.0;transition:opacity .2s}
+body.touch:not(.touch-crosshair) #crosshair{display:none}
+body.touch-crosshair #crosshair{display:block}
+body.touch #game-controls .game-btn:not(#menu-open-btn){display:none!important}
+body.touch #menu-open-btn{padding:8px 11px;min-width:66px;border-radius:8px;font-size:10px}
+body.touch #game-controls{top:8px;right:8px;max-width:100px}
+body.touch #world-card{max-width:185px}
+#dpad-controls{display:none;position:absolute;left:calc(24px + env(safe-area-inset-left));bottom:100px;width:138px;height:138px;pointer-events:none}
+.dpad-btn{position:absolute;width:43px;height:43px;border:1.5px solid rgba(255,255,255,.55);border-radius:9px;background:rgba(24,36,45,.50);color:#fff;font:800 18px ui-sans-serif,system-ui,sans-serif;box-shadow:0 3px 12px #0004;pointer-events:auto}
+.dpad-btn:active,.dpad-btn.on{background:rgba(77,140,54,.9)}
+.dpad-up{left:47px;top:0}.dpad-left{left:0;top:47px}.dpad-right{right:0;top:47px}.dpad-down{left:47px;bottom:0}
+body.touch-dpad #joy{display:none}
+body.touch-dpad #dpad-controls{display:block}
+body.touch-lefty #joy{left:auto;right:calc(22px + env(safe-area-inset-right))}
+body.touch-lefty #dpad-controls{left:auto;right:calc(24px + env(safe-area-inset-right))}
+body.touch-lefty .touch-jump{right:auto;left:calc(24px + env(safe-area-inset-left))}
+body.touch-lefty .touch-sneak{right:auto;left:calc(102px + env(safe-area-inset-left))}
+body.touch-lefty .touch-action{right:auto;left:calc(28px + env(safe-area-inset-left))}
+body.touch-lefty .touch-top-button{right:auto;left:calc(12px + env(safe-area-inset-left))}
+body.touch-lefty #game-controls{right:auto;left:8px}
+body.touch-lefty #world-card{left:auto;right:8px}
+body.touch-lefty #minimap-frame{left:auto;right:8px}
+body.touch-lefty #weather-indicator{left:auto;right:8px}
+.touch-settings-heading{margin-top:8px;padding-top:12px;border-top:1px solid rgba(218,237,245,.13);font-size:10px;font-weight:900;letter-spacing:1.4px;color:#a8e66d}
+#touch-left-handed{width:18px;height:18px;justify-self:start;accent-color:#9be45e}
+.touch-settings-heading,.touch-setting-row{display:none}
+body.touch .touch-settings-heading{display:block}
+body.touch .touch-setting-row{display:grid}
+.dpad-btn{transform:scale(var(--touch-btn-scale,1))}
+@media(max-width:520px){body.touch #world-card{width:150px;padding:7px 9px;top:52px}body.touch #world-biome{font-size:12px}body.touch #minimap-frame{top:151px;transform:scale(.82);transform-origin:top left}body.touch-lefty #minimap-frame{transform-origin:top right}body.touch #weather-indicator{bottom:142px;font-size:9px}body.touch #hud-bottom{transform:translateX(-50%) scale(.56);bottom:2px}#joy{width:122px;height:122px;bottom:90px}#joy i{left:35px;top:35px}#dpad-controls{transform:scale(.88);transform-origin:bottom left;bottom:88px}body.touch-lefty #dpad-controls{transform-origin:bottom right}.touch-jump{width:62px;height:62px;bottom:32px}.touch-sneak{bottom:38px;width:44px;height:44px}body.touch .touch-top-button{top:58px}}
+@media(max-height:520px){#joy{width:108px;height:108px;bottom:68px}#joy i{left:29px;top:29px}#dpad-controls{bottom:62px;transform:scale(.8);transform-origin:bottom left}.touch-jump{bottom:20px;width:58px;height:58px}.touch-sneak{bottom:24px}.touch-action{bottom:92px}}
 </style>
 </head>
 <body>
@@ -257,11 +357,24 @@
 <div id="debug-hud"></div>
 <div id="game-controls">
   <button class="game-btn" id="mode-toggle-btn">MODE: SURVIVAL</button>
-  <button class="game-btn" id="menu-open-btn">MENU</button>
+  <button class="game-btn" id="menu-open-btn">PAUSE</button><button class="game-btn" id="journal-btn">JOURNAL</button><button class="game-btn" id="settings-btn">SETTINGS</button>
   <button class="game-btn" id="save-world-btn">SAVE</button>
   <button class="game-btn" id="load-world-btn">LOAD</button>
 </div>
 <div id="save-status" aria-live="polite"></div>
+
+<div id="world-card" aria-live="polite">
+  <div class="world-eyebrow">WORLD EXPLORER</div>
+  <div id="world-biome">Loading biome…</div>
+  <div class="world-meta"><span id="world-clock">DAY 1 · 06:00</span><span id="world-weather">CLEAR</span></div>
+  <div class="world-meta"><span id="world-coords">X 0 · Y 0 · Z 0</span><span id="world-seed">SEED 42069</span></div>
+  <div class="world-quest" id="active-quest">First steps · 0/10</div>
+</div>
+<div id="minimap-frame">
+  <div class="map-head"><span>LOCAL MAP</span><span>N ↑</span></div>
+  <canvas id="minimap" width="144" height="144" aria-label="Nearby terrain map"></canvas>
+  <div class="map-foot" id="map-biome">UNKNOWN BIOME</div>
+</div>
 
 <div id="hud-bottom">
   <div id="target-tooltip"></div>
@@ -271,7 +384,7 @@
     <div id="hearts-bar"></div>
     <div id="hunger-bar"></div>
   </div>
-  <div id="xp-wrap"><div id="xp-fill"></div><span id="xp-level">0</span></div>
+  <div id="xp-meta"><span id="xp-level">LEVEL 1</span><span id="xp-count">0 / 20 XP</span></div><div id="xp-wrap"><div id="xp-fill"></div></div>
   <div id="hotbar"></div>
 </div>
 
@@ -341,16 +454,54 @@
 
 <div id="cursor-item"></div>
 
+<div id="quest-toast" role="status" aria-live="polite"></div>
+<div id="pause-modal" class="overlay-modal" aria-modal="true" role="dialog" aria-labelledby="pause-heading">
+  <section class="panel-window pause-window">
+    <div class="panel-kicker">WORLD PAUSED</div><h2 id="pause-heading">Take a breath.</h2>
+    <p>Your world is paused. Your progress remains safe while you plan your next move.</p>
+    <div class="panel-actions">
+      <button class="primary-action" id="resume-btn">RESUME WORLD</button>
+      <button id="pause-journal-btn">ADVENTURE JOURNAL</button>
+      <button id="pause-settings-btn">SETTINGS</button>
+      <button id="pause-save-btn">SAVE WORLD</button>
+    </div>
+    <div class="panel-hint">P to resume · J journal · E inventory · F5 save</div>
+  </section>
+</div>
+<div id="settings-modal" class="overlay-modal" aria-modal="true" role="dialog" aria-labelledby="settings-heading">
+  <section class="panel-window settings-window">
+    <div class="panel-kicker">PERSONALIZE YOUR SESSION</div><h2 id="settings-heading">Game settings</h2>
+    <div class="setting-row"><div><b>Master volume</b><small>Sound effects</small></div><input id="volume-setting" type="range" min="0" max="1" step="0.05" value="0.72"><output id="volume-value">72%</output></div>
+    <div class="setting-row"><div><b>Mouse sensitivity</b><small>Camera look speed</small></div><input id="sensitivity-setting" type="range" min="0.0008" max="0.005" step="0.0001" value="0.0024"><output id="sensitivity-value">0.0024</output></div>
+    <div class="setting-row"><div><b>Render quality</b><small>Lower values can improve FPS</small></div><select id="quality-setting"><option value="0.75">Performance</option><option value="1" selected>Balanced</option><option value="1.35">High</option></select><output></output></div>
+    <div class="setting-row"><div><b>Field of view</b><small>Camera perspective</small></div><input id="fov-setting" type="range" min="60" max="100" step="1" value="72"><output id="fov-value">72°</output></div>
+    <div class="touch-settings-heading">MOBILE TOUCH CONTROLS</div>
+    <div class="setting-row touch-setting-row"><div><b>Control layout</b><small>Choose your Minecraft-style touch scheme</small></div><select id="touch-control-mode"><option value="joystick-tap">Joystick &amp; tap to interact</option><option value="joystick-crosshair">Joystick &amp; aim crosshair</option><option value="dpad-tap">D-pad &amp; tap to interact</option><option value="dpad-crosshair">D-pad &amp; aim crosshair (split)</option></select><output></output></div>
+    <div class="setting-row touch-setting-row"><div><b>Left-handed layout</b><small>Swap movement and action sides</small></div><input id="touch-left-handed" type="checkbox"><output></output></div>
+    <div class="setting-row touch-setting-row"><div><b>Action button size</b><small>Adjust on-screen control size</small></div><input id="touch-button-size" type="range" min="0.8" max="1.3" step="0.05" value="1"><output id="touch-button-size-value">100%</output></div>
+    <div class="setting-row touch-setting-row"><div><b>Joystick opacity</b><small>Make the movement stick more or less visible</small></div><input id="touch-joystick-opacity" type="range" min="0.15" max="0.75" step="0.05" value="0.42"><output id="touch-joystick-opacity-value">42%</output></div>
+    <div class="panel-actions"><button class="primary-action" id="settings-done-btn">DONE</button></div>
+  </section>
+</div>
+<div id="journal-modal" class="overlay-modal" aria-modal="true" role="dialog" aria-labelledby="journal-heading">
+  <section class="panel-window journal-window">
+    <div class="panel-kicker">EXPLORATION & PROGRESSION</div><h2 id="journal-heading">Adventure journal</h2>
+    <div class="journal-stats" id="journal-stats"></div><div id="quest-list"></div>
+    <div class="panel-actions"><button class="primary-action" id="journal-close-btn">CLOSE JOURNAL</button></div>
+  </section>
+</div>
+
 <div id="blocker">
   <h1>VOXELCRAFT</h1>
-  <div class="subtitle">Procedural voxel world with biomes, caves, ores, smelting, farming, chests, beds, TNT, animals, schooling fish, and hostile night mobs.</div>
+  <div class="subtitle">Explore a living voxel world: discover biomes, mine rare ores, build a base, farm crops, breed animals, survive hostile nights, and grow your skills through quests.</div>
   <div class="menu-panel">
     <div class="menu-controls-grid">
       <div><strong>WASD</strong>: Move &nbsp;|&nbsp; <strong>Space</strong>: Jump / Swim (2x Fly in Creative)</div>
       <div><strong>Left-Click</strong>: Mine / Attack &nbsp;|&nbsp; <strong>Right-Click</strong>: Place / Use / Feed</div>
       <div><strong>E</strong>: Inventory &amp; Crafting &nbsp;|&nbsp; <strong>F</strong>: Eat Food &nbsp;|&nbsp; <strong>Q</strong>: Drop Item</div>
       <div><strong>Shift</strong>: Sneak / Dive &nbsp;|&nbsp; <strong>Ctrl</strong>: Sprint &nbsp;|&nbsp; <strong>1-9</strong>: Hotbar</div>
-      <div><strong>G</strong>: Cycle Weather &nbsp;|&nbsp; <strong>M</strong>: Survival/Creative &nbsp;|&nbsp; <strong>F3</strong>: Debug</div>
+      <div><strong>G</strong>: Cycle Weather &nbsp;|&nbsp; <strong>M</strong>: Survival/Creative &nbsp;|&nbsp; <strong>J</strong>: Journal &nbsp;|&nbsp; <strong>P</strong>: Pause &nbsp;|&nbsp; <strong>F3</strong>: Debug</div>
+      <div><strong>Mobile</strong>: Left stick = move · Drag open screen = look · Tap = use/place · Hold = mine/attack · ↑ = jump · ↓ = sneak</div>
       <div><strong>Drag Screen</strong>: Works automatically if Pointer Lock is blocked</div>
     </div>
     <div class="menu-row">
@@ -364,14 +515,19 @@
   <button id="play-btn" class="mc-btn primary">Play World</button>
 </div>
 
-<div id="touch-ui">
-  <div id="joy"><i></i></div>
-  <div class="tb" id="b-mine" data-a="mine">MINE</div>
-  <div class="tb" id="b-place" data-a="place">USE</div>
-  <div class="tb" id="b-jump" data-a="jump">JUMP</div>
-  <div class="tb" id="b-inv" data-a="inv">BAG</div>
-  <div class="tb" id="b-eat" data-a="eat">EAT</div>
-  <div class="tb" id="b-sneak" data-a="sneak">DOWN</div>
+<div id="touch-ui" aria-label="Mobile touch controls">
+  <div id="joy" aria-label="Movement joystick"><i></i></div>
+  <div id="dpad-controls" aria-label="Directional movement">
+    <button class="dpad-btn dpad-up" data-key="KeyW" aria-label="Move forward">▲</button>
+    <button class="dpad-btn dpad-left" data-key="KeyA" aria-label="Move left">◀</button>
+    <button class="dpad-btn dpad-right" data-key="KeyD" aria-label="Move right">▶</button>
+    <button class="dpad-btn dpad-down" data-key="KeyS" aria-label="Move backward">▼</button>
+  </div>
+  <button class="touch-orb touch-jump" id="b-jump" aria-label="Jump">↑</button>
+  <button class="touch-orb touch-sneak" id="b-sneak" aria-label="Toggle sneak">↓</button>
+  <button class="touch-orb touch-action" id="b-touch-action" aria-label="Context action">USE</button>
+  <button class="touch-top-button" id="mobile-bag" aria-label="Open inventory">▤</button>
+  <div class="touch-tip" id="touch-tip">DRAG TO LOOK · HOLD TO MINE</div>
 </div>
 
 <script type="module">
@@ -446,13 +602,22 @@ class NoiseGenerator {
    2. WEB AUDIO SYNTHESIZER
    ============================================================================ */
 class SoundEngine {
-  constructor() { this.ctx = null; }
+  constructor() { this.ctx = null; this.masterGain = null; this.volume = 0.72; }
   init() {
     if (!this.ctx) {
       const AudioCtx = window.AudioContext || window.webkitAudioContext;
       if (AudioCtx) this.ctx = new AudioCtx();
     }
+    if (this.ctx && !this.masterGain) {
+      this.masterGain = this.ctx.createGain();
+      this.masterGain.gain.value = this.volume;
+      this.masterGain.connect(this.ctx.destination);
+    }
     if (this.ctx && this.ctx.state === 'suspended') this.ctx.resume().catch(() => {});
+  }
+  setVolume(value) {
+    this.volume = Math.max(0, Math.min(1, Number(value) || 0));
+    if (this.masterGain && this.ctx) this.masterGain.gain.setTargetAtTime(this.volume, this.ctx.currentTime, 0.025);
   }
   playTone(f0, f1, dur, type = 'square', gVal = 0.1) {
     if (!this.ctx) return;
@@ -460,7 +625,7 @@ class SoundEngine {
     osc.type = type; osc.frequency.setValueAtTime(f0, now);
     osc.frequency.exponentialRampToValueAtTime(Math.max(20, f1), now + dur);
     g.gain.setValueAtTime(gVal, now); g.gain.exponentialRampToValueAtTime(0.001, now + dur);
-    osc.connect(g); g.connect(this.ctx.destination); osc.start(now); osc.stop(now + dur);
+    osc.connect(g); g.connect(this.masterGain || this.ctx.destination); osc.start(now); osc.stop(now + dur);
   }
   playNoise(dur, freq, gVal = 0.12) {
     if (!this.ctx) return;
@@ -470,7 +635,7 @@ class SoundEngine {
     const src = this.ctx.createBufferSource(); src.buffer = buf;
     const f = this.ctx.createBiquadFilter(); f.type = 'bandpass'; f.frequency.setValueAtTime(freq, now);
     const g = this.ctx.createGain(); g.gain.setValueAtTime(gVal, now); g.gain.exponentialRampToValueAtTime(0.001, now + dur);
-    src.connect(f); f.connect(g); g.connect(this.ctx.destination); src.start(now);
+    src.connect(f); f.connect(g); g.connect(this.masterGain || this.ctx.destination); src.start(now);
   }
   playStep(isWater = false) {
     if (isWater) this.playNoise(0.14, 420, 0.08);
@@ -487,6 +652,31 @@ class SoundEngine {
   playFuse() { this.playNoise(0.45, 2200, 0.1); }
   playZombieGroan() { this.playTone(95, 58, 0.45, 'sawtooth', 0.08); }
   playThunder() { this.playNoise(1.25, 78, 0.17); this.playTone(82, 28, 1.15, 'sawtooth', 0.08); }
+  playAnvil() {
+    if (!this.ctx) return;
+    const now = this.ctx.currentTime;
+    const freqs = [784, 1175, 1760, 2349];
+    freqs.forEach((f, idx) => {
+      const osc = this.ctx.createOscillator();
+      const g = this.ctx.createGain();
+      osc.type = idx === 0 ? 'triangle' : 'sine';
+      osc.frequency.setValueAtTime(f * (0.985 + Math.random() * 0.03), now);
+      osc.frequency.exponentialRampToValueAtTime(f * 0.96, now + 0.36);
+      const amp = 0.11 / (idx + 1);
+      g.gain.setValueAtTime(amp, now);
+      g.gain.exponentialRampToValueAtTime(0.001, now + (idx < 2 ? 0.38 : 0.22));
+      osc.connect(g); g.connect(this.masterGain || this.ctx.destination);
+      osc.start(now); osc.stop(now + 0.4);
+    });
+    this.playTone(210, 88, 0.09, 'square', 0.08);
+    this.playNoise(0.05, 2400, 0.1);
+  }
+  playDropImpact(intensity = 0.7) {
+    const vol = Math.max(0.35, Math.min(1, intensity));
+    const pitch = 155 + Math.random() * 45;
+    this.playTone(pitch, pitch * 0.42, 0.06, 'triangle', 0.065 * vol);
+    this.playNoise(0.035, 380 + Math.random() * 140, 0.05 * vol);
+  }
 }
 
 /* ============================================================================
@@ -746,17 +936,28 @@ class TextureAtlasBuilder {
         if (r < 0.22) px(x,y,'#d6c890'); else if (r > 0.82) px(x,y,'#ece2b4');
       }
     });
-    const waterC = this.createPixelCanvas((ctx, px) => {
-      ctx.fillStyle = '#207b98'; ctx.fillRect(0, 0, 16, 16);
-      const pal = ['#1d708a', '#1f7a97', '#2284a4', '#2791ad', '#32a0b7', '#43afc1'];
-      for (let y = 0; y < 16; y++) for (let x = 0; x < 16; x++) {
-        const v = Math.sin(x * 0.72 + y * 0.36 + 0.5) * 0.72 + Math.cos(y * 0.66 - x * 0.24) * 0.42 + (this.hash2(x, y, 217) - 0.5) * 0.62;
-        let col = pal[2];
-        if (v < -0.85) col = pal[0]; else if (v < -0.25) col = pal[1]; else if (v > 0.95) col = pal[5]; else if (v > 0.48) col = pal[4]; else if (v > 0.15) col = pal[3];
-        px(x, y, col);
+    // Smooth water preview texture for inventory/world icons. The actual world surface
+    // is rendered procedurally below, so it no longer inherits a pixel-art/checker look.
+    const waterC = (() => {
+      const c = document.createElement('canvas'); c.width = 128; c.height = 128;
+      const ctx = c.getContext('2d', { alpha: false });
+      const image = ctx.createImageData(c.width, c.height);
+      for (let y = 0; y < c.height; y++) {
+        for (let x = 0; x < c.width; x++) {
+          const u = x / c.width, v = y / c.height;
+          const broad = Math.sin(u * 6.283 + v * 2.25) * 0.48 + Math.cos(v * 6.283 - u * 1.65) * 0.36;
+          const fine = Math.sin((u + v) * 31.0) * Math.cos((v - u * 0.7) * 27.0) * 0.08;
+          const t = Math.max(0, Math.min(1, 0.52 + broad * 0.16 + fine));
+          const i = (y * c.width + x) * 4;
+          image.data[i] = 15 + t * 27;
+          image.data[i + 1] = 79 + t * 72;
+          image.data[i + 2] = 103 + t * 76;
+          image.data[i + 3] = 255;
+        }
       }
-      [[1,4],[2,4],[3,5],[8,2],[9,2],[12,8],[13,8],[5,12],[6,12],[14,14]].forEach(([x,y]) => px(x, y, '#55bdca'));
-    });
+      ctx.putImageData(image, 0, 0);
+      return c;
+    })();
     const lavaC = this.createPixelCanvas((ctx, px) => {
       ctx.fillStyle = '#d94d12'; ctx.fillRect(0,0,16,16);
       for (let y = 0; y < 16; y++) for (let x = 0; x < 16; x++) {
@@ -968,33 +1169,117 @@ class TextureAtlasBuilder {
     this.leavesMat = new THREE.MeshLambertMaterial({ map: this.toThreeTex(this.cutoutAtlasCanvas), vertexColors: true, alphaTest: 0.38, side: THREE.DoubleSide });
 
     this.waterMat = new THREE.ShaderMaterial({
-      uniforms: { uTime: { value: 0 }, uWaterTex: { value: this.textures.water }, uLightLevel: { value: 1.0 } },
+      uniforms: THREE.UniformsUtils.merge([
+        THREE.UniformsLib.fog,
+        {
+          uTime: { value: 0 },
+          uLightLevel: { value: 1.0 },
+          uCameraPosition: { value: new THREE.Vector3() },
+          uSunDirection: { value: new THREE.Vector3(0.35, 0.82, 0.25).normalize() }
+        }
+      ]),
       vertexShader: `
-        varying vec2 vUv; varying vec3 vColor; varying vec3 vWorldPosition; uniform float uTime;
+        varying vec3 vWorldPosition;
+        varying vec3 vWorldNormal;
+        varying vec3 vColor;
+        uniform float uTime;
+        #include <fog_pars_vertex>
+
+        // Broad, low-amplitude wave groups. Sampling in world space keeps adjacent
+        // chunks joined without visible wave seams.
+        float waterWave(vec2 p, float t) {
+          float a = sin(dot(p, vec2(0.72, 0.69)) * 0.78 + t * 0.72) * 0.030;
+          float b = sin(dot(p, vec2(-0.88, 0.48)) * 1.18 - t * 0.53) * 0.016;
+          float c = sin(dot(p, vec2(0.18, -0.98)) * 2.35 + t * 0.39) * 0.006;
+          return a + b + c;
+        }
+
         void main() {
-          vUv = uv; vColor = color;
           vec4 worldPos = modelMatrix * vec4(position, 1.0);
-          if (fract(worldPos.y) > 0.2) {
-            worldPos.y += (sin(worldPos.x * 1.05 + uTime * 1.65) * cos(worldPos.z * 0.92 + uTime * 1.35)) * 0.055;
-          }
+          float upperEdge = smoothstep(0.72, 0.96, fract(worldPos.y + 0.001));
+          worldPos.y += waterWave(worldPos.xz, uTime) * upperEdge;
           vWorldPosition = worldPos.xyz;
-          gl_Position = projectionMatrix * viewMatrix * worldPos;
+          vWorldNormal = normalize(mat3(modelMatrix) * normal);
+          vColor = color;
+          // The Three.js fog_vertex chunk reads mvPosition; define it explicitly
+          // because this custom shader does not use the standard project_vertex chunk.
+          vec4 mvPosition = viewMatrix * worldPos;
+          gl_Position = projectionMatrix * mvPosition;
+          #include <fog_vertex>
         }
       `,
       fragmentShader: `
-        varying vec2 vUv; varying vec3 vColor; varying vec3 vWorldPosition;
-        uniform sampler2D uWaterTex; uniform float uTime; uniform float uLightLevel;
+        varying vec3 vWorldPosition;
+        varying vec3 vWorldNormal;
+        varying vec3 vColor;
+        uniform float uTime;
+        uniform float uLightLevel;
+        uniform vec3 uCameraPosition;
+        uniform vec3 uSunDirection;
+        #include <fog_pars_fragment>
+
+        float waterWave(vec2 p, float t) {
+          float a = sin(dot(p, vec2(0.72, 0.69)) * 0.9 + t * 0.85) * 0.030;
+          float b = sin(dot(p, vec2(-0.88, 0.48)) * 1.5 - t * 0.62) * 0.018;
+          float c = sin(dot(p, vec2(0.18, -0.98)) * 2.9 + t * 0.47) * 0.008;
+          return a + b + c;
+        }
+
         void main() {
-          vec2 flowUv = vUv + vec2(uTime * 0.018, uTime * 0.012);
-          vec4 texColor = texture2D(uWaterTex, flowUv);
-          float ripple = sin((vWorldPosition.x + vWorldPosition.z * 0.7) * 1.8 + uTime * 1.4) * cos((vWorldPosition.z - vWorldPosition.x * 0.6) * 1.6 - uTime * 1.1);
-          float glint = smoothstep(0.55, 0.95, ripple);
-          vec3 waterColor = mix(texColor.rgb, vec3(0.11, 0.48, 0.59), 0.22) + glint * vec3(0.08, 0.16, 0.17);
-          gl_FragColor = vec4(waterColor * vColor * uLightLevel, 0.76);
+          vec3 faceNormal = normalize(vWorldNormal);
+          vec3 normal = faceNormal;
+          float topFace = smoothstep(0.42, 0.88, faceNormal.y);
+          vec2 p = vWorldPosition.xz;
+
+          // Smooth, continuous wave normals: this is what makes the surface read as liquid.
+          if (topFace > 0.001) {
+            float e = 0.05;
+            float h  = waterWave(p, uTime);
+            float hx = waterWave(p + vec2(e, 0.0), uTime);
+            float hz = waterWave(p + vec2(0.0, e), uTime);
+            vec3 wn = normalize(vec3(-(hx - h) / e * 1.6, 1.0, -(hz - h) / e * 1.6));
+            normal = normalize(mix(faceNormal, wn, topFace));
+          }
+
+          vec3 viewDir = normalize(uCameraPosition - vWorldPosition);
+          float nDotV = max(dot(normal, viewDir), 0.0);
+          float fresnel = 0.02 + 0.98 * pow(1.0 - nDotV, 4.0);
+
+          // Soft caustic-like light bands (smooth, not pixelated).
+          float c1 = sin(p.x * 2.3 + sin(p.y * 1.7 + uTime * 0.7) * 1.6 + uTime * 0.5);
+          float c2 = sin(p.y * 2.1 + sin(p.x * 1.9 - uTime * 0.6) * 1.6 - uTime * 0.4);
+          float caustic = pow(1.0 - abs(c1 * c2), 6.0) * topFace;
+
+          // Very light, almost clear tint; only a hint of aqua.
+          vec3 tint = vec3(0.60, 0.88, 0.95);
+          vec3 sky = vec3(0.55, 0.75, 0.92);
+          vec3 col = mix(tint, sky, fresnel * 0.8);
+
+          // Sun glints on the wave crests.
+          vec3 hv = normalize(normalize(uSunDirection) + viewDir);
+          float spec = pow(max(dot(normal, hv), 0.0), 140.0) * 1.1;
+          col += vec3(1.0, 0.97, 0.88) * spec * uLightLevel;
+          col += vec3(0.55, 0.85, 0.95) * caustic * 0.20;
+
+          col *= (0.55 + 0.45 * uLightLevel) * mix(1.0, vColor.r, 0.5);
+
+          // Mostly transparent head-on, more reflective at grazing angles.
+          float alpha = mix(0.22, 0.72, fresnel) + spec * 0.4 + caustic * 0.05;
+          alpha = mix(alpha * 0.8, alpha, topFace);
+          gl_FragColor = vec4(col, clamp(alpha, 0.0, 0.92));
+          #include <tonemapping_fragment>
+          #include <colorspace_fragment>
+          #include <fog_fragment>
         }
       `,
-      transparent: true, depthWrite: false, side: THREE.DoubleSide, vertexColors: true
+      transparent: true,
+      depthWrite: false,
+      side: THREE.DoubleSide,
+      vertexColors: true,
+      fog: true,
+      toneMapped: true
     });
+
 
     this.lavaMat = new THREE.ShaderMaterial({
       uniforms: { uTime: { value: 0 }, uLavaTex: { value: this.textures.lava } },
@@ -1168,6 +1453,7 @@ class Chunk {
     this.data = new Uint8Array(CHUNK_W * CHUNK_H * CHUNK_D);
     this.meshes = [];
     this.dirty = true;
+    this.built = false;
     this.emissives = [];
   }
   idx(x, y, z) { return (y * CHUNK_D + z) * CHUNK_W + x; }
@@ -1613,31 +1899,68 @@ class VoxelWorld {
     createMesh(water, this.atlas.waterMat, 2);
     createMesh(lava, this.atlas.lavaMat, 2);
     chunk.dirty = false;
+    chunk.built = true;
   }
 
-  updateChunksAround(px, pz) {
+  // A chunk is only meshed once every neighbour (including diagonals) has terrain data,
+  // so no chunk is ever drawn with a cut-open edge hanging in the sky.
+  neighboursReady(chunk) {
+    for (let dx = -1; dx <= 1; dx++) for (let dz = -1; dz <= 1; dz++) {
+      if ((dx || dz) && !this.chunks.has(this.key(chunk.cx + dx, chunk.cz + dz))) return false;
+    }
+    return true;
+  }
+
+  // True once the chunk at this position has a mesh, so the player never stands on invisible ground.
+  isReadyAt(wx, wz) {
+    const c = this.chunks.get(this.key(Math.floor(wx / CHUNK_W), Math.floor(wz / CHUNK_D)));
+    return !!(c && c.built);
+  }
+
+  updateChunksAround(px, pz, force = false) {
     const pcx = Math.floor(px / CHUNK_W), pcz = Math.floor(pz / CHUNK_D);
-    const needed = new Set();
-    for (let dx = -RENDER_RADIUS; dx <= RENDER_RADIUS; dx++) {
-      for (let dz = -RENDER_RADIUS; dz <= RENDER_RADIUS; dz++) {
-        const cx = pcx + dx, cz = pcz + dz, k = this.key(cx, cz);
-        needed.add(k);
-        if (!this.chunks.has(k)) {
-          this.generateChunk(cx, cz);
-          this.markDirty(cx - 1, cz); this.markDirty(cx + 1, cz);
-          this.markDirty(cx, cz - 1); this.markDirty(cx, cz + 1);
-        }
+    const DATA_R = RENDER_RADIUS + 1;   // extra ring: terrain data only, never meshed
+    const KEEP_R = RENDER_RADIUS + 2;   // hysteresis so chunks don't thrash at the border
+    const dist = (c) => Math.max(Math.abs(c.cx - pcx), Math.abs(c.cz - pcz));
+
+    // 1. Generate missing terrain, nearest first (throttled unless forced)
+    const missing = [];
+    for (let dx = -DATA_R; dx <= DATA_R; dx++) {
+      for (let dz = -DATA_R; dz <= DATA_R; dz++) {
+        const cx = pcx + dx, cz = pcz + dz;
+        if (!this.chunks.has(this.key(cx, cz))) missing.push({ cx, cz, d: Math.max(Math.abs(dx), Math.abs(dz)), e: dx * dx + dz * dz });
       }
     }
+    missing.sort((a, b) => a.d - b.d || a.e - b.e);
+    let generated = 0;
+    for (const m of missing) {
+      this.generateChunk(m.cx, m.cz);
+      this.markDirty(m.cx - 1, m.cz); this.markDirty(m.cx + 1, m.cz);
+      this.markDirty(m.cx, m.cz - 1); this.markDirty(m.cx, m.cz + 1);
+      if (!force && ++generated >= 3) break;
+    }
+
+    // 2. Unload far chunks
     for (const [k, chunk] of this.chunks.entries()) {
-      if (!needed.has(k)) {
-        for (const m of chunk.meshes) { this.scene.remove(m); m.geometry.dispose(); }
+      if (dist(chunk) > KEEP_R) {
+        for (const mesh of chunk.meshes) { this.scene.remove(mesh); mesh.geometry.dispose(); }
         this.chunks.delete(k);
       }
     }
-    let built = 0;
+
+    // 3. Mesh dirty chunks inside render distance, nearest first, within a time budget
+    const todo = [];
     for (const chunk of this.chunks.values()) {
-      if (chunk.dirty) { this.buildChunkMesh(chunk); built++; if (built >= 3) break; }
+      if (chunk.dirty && dist(chunk) <= RENDER_RADIUS && this.neighboursReady(chunk)) todo.push(chunk);
+    }
+    todo.sort((a, b) => {
+      const da = (a.cx - pcx) ** 2 + (a.cz - pcz) ** 2, db = (b.cx - pcx) ** 2 + (b.cz - pcz) ** 2;
+      return da - db;
+    });
+    const t0 = performance.now();
+    for (let i = 0; i < todo.length; i++) {
+      this.buildChunkMesh(todo[i]);
+      if (!force && performance.now() - t0 > 8) break;
     }
   }
 }
@@ -1690,102 +2013,131 @@ class ParticleSystem {
 }
 
 class HeldItemRenderer {
+  // Minecraft-style first-person hand: ONE simple arm box (sleeve + skin), items mounted at the hand tip.
   constructor(camera, atlas, world) {
     this.camera = camera;
     this.atlas = atlas;
     this.world = world;
-    this.group = new THREE.Group();
-    this.group.position.set(0.32, -0.28, -0.45);
-    this.group.rotation.set(0.2, -0.4, 0.1);
+    this.group = new THREE.Group();          // root: lower-right of screen, tip of the arm is the origin
     this.camera.add(this.group);
+    this.mount = new THREE.Group();          // everything held attaches here (= the hand)
+    this.group.add(this.mount);
     this.currentMesh = null;
     this.currentId = null;
     this.swingProgress = 0;
     this.isSwinging = false;
+    this.equip = 1;
+    this.idleTime = 0;
+    this.moveBlend = 0;
+    this.walkPhase = 0;
+
+    const skin = new THREE.MeshLambertMaterial({ color: 0xd9a37a, emissive: 0x2a1a10 });
+    const sleeve = new THREE.MeshLambertMaterial({ color: 0x2f7fb3, emissive: 0x08141c });
+    const fist = new THREE.Mesh(new THREE.BoxGeometry(0.10, 0.10, 0.17), skin);      // hand (front)
+    fist.position.set(0, 0, 0.085);
+    const arm = new THREE.Mesh(new THREE.BoxGeometry(0.11, 0.11, 0.70), sleeve);      // sleeve (back)
+    arm.position.set(0, 0, 0.52);
+    this.group.add(fist, arm);
   }
 
   triggerSwing() { this.isSwinging = true; this.swingProgress = 0; }
+  triggerSwingIfIdle() { if (!this.isSwinging) this.triggerSwing(); }
 
-  update(dt, isMoving, speedVal) {
+  update(dt, isMoving) {
     if (this.isSwinging) {
-      this.swingProgress += dt * 10;
+      this.swingProgress += dt * 9;
       if (this.swingProgress >= Math.PI) { this.swingProgress = 0; this.isSwinging = false; }
     }
-    const bobX = Math.sin(speedVal * 12) * 0.028 * (isMoving ? 1 : 0.15);
-    const bobY = Math.abs(Math.cos(speedVal * 12)) * 0.028 * (isMoving ? 1 : 0.15);
-    const swingRot = this.isSwinging ? Math.sin(this.swingProgress) * 0.95 : 0;
-    this.group.position.set(0.32 + bobX, -0.28 + bobY, -0.45);
-    this.group.rotation.set(0.2 - swingRot * 0.85, -0.4 + swingRot * 0.4, 0.1 + swingRot * 0.45);
+    if (this.equip > 0) this.equip = Math.max(0, this.equip - dt * 4.0);
+    this.idleTime += dt;
+    this.moveBlend += ((isMoving ? 1 : 0) - this.moveBlend) * Math.min(1, dt * 8);
+    this.walkPhase += dt * 8.5 * this.moveBlend;
+
+    const e = this.equip * this.equip;
+    const bobX = Math.sin(this.walkPhase) * 0.016 * this.moveBlend;
+    const bobY = -Math.abs(Math.cos(this.walkPhase)) * 0.014 * this.moveBlend;
+    const breathe = Math.sin(this.idleTime * 1.4) * 0.003 * (1 - this.moveBlend);
+    const sw = this.isSwinging ? Math.sin(this.swingProgress) : 0;
+    const swS = this.isSwinging ? Math.sin(Math.sqrt(this.swingProgress / Math.PI) * Math.PI) : 0;
+
+    // Base pose (like vanilla): arm points forward-left, comes in from the lower-right corner.
+    this.group.position.set(0.30 + bobX - sw * 0.10, -0.25 + bobY + breathe - e * 0.55 - sw * 0.05, -0.66 - sw * 0.14);
+    this.group.rotation.set(0.30 - swS * 0.85 - e * 0.5, 0.22 + sw * 0.35, -0.04 + sw * 0.25);
+  }
+
+  _clear() {
+    if (!this.currentMesh) return;
+    this.currentMesh.traverse(o => { if (o.isMesh) { o.geometry?.dispose?.(); if (o.material && !o.material.isShaderMaterial && o.material !== this.atlas.opaqueMat && o.material !== this.atlas.leavesMat) o.material.dispose?.(); } });
+    this.mount.remove(this.currentMesh);
+    this.currentMesh = null;
   }
 
   setItem(itemId) {
-    if (itemId === this.currentId && this.currentMesh) return;
+    if (itemId === this.currentId && (this.currentMesh || !itemId)) return;
+    if (itemId !== this.currentId) this.equip = 1;
     this.currentId = itemId;
-    if (this.currentMesh) {
-      this.currentMesh.traverse(o => { if (o.isMesh) { o.geometry?.dispose?.(); o.material?.dispose?.(); } });
-      this.group.remove(this.currentMesh);
-      this.currentMesh = null;
-    }
+    this._clear();
     if (!itemId) return;
 
     const meta = ITEMS_META[itemId];
+    const wrapper = new THREE.Group();      // rotation/placement relative to the hand
+
     if (itemId === ITEM.STICK || itemId === BLOCK.TORCH || meta?.toolType || meta?.isBow) {
-      const toolGroup = new THREE.Group();
-      const woodColor = 0x8a5b2e;
+      // Tool built on a diagonal axis (grip bottom-left -> head top-right), then shifted so the GRIP sits at the hand.
+      const tool = new THREE.Group();
       const headColors = { wood: 0xc49a5c, stone: 0x9aa2a8, iron: 0xdce2e8, diamond: 0x3be3f2 };
       const headColor = headColors[meta?.toolMaterial] || 0x9da7ae;
-      const woodMat = new THREE.MeshLambertMaterial({ color: woodColor });
-      const headMat = new THREE.MeshLambertMaterial({ color: headColor });
+      const woodMat = new THREE.MeshLambertMaterial({ color: 0x8a5b2e, emissive: 0x24160a });
+      const headMat = new THREE.MeshLambertMaterial({ color: headColor, emissive: new THREE.Color(headColor).multiplyScalar(0.28) });
       const handle = new THREE.Mesh(new THREE.BoxGeometry(0.055, 0.52, 0.055), woodMat);
-      handle.rotation.z = Math.PI * 0.25;
-      toolGroup.add(handle);
+      handle.rotation.z = -Math.PI * 0.25;   // axis (0.707, 0.707): head end is up-right
+      tool.add(handle);
       const addPart = (w, h, d, x, y, material = headMat, rot = 0) => {
         const part = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), material);
-        part.position.set(x, y, 0); part.rotation.z = rot; toolGroup.add(part);
+        part.position.set(x, y, 0); part.rotation.z = rot; tool.add(part);
       };
       const style = itemId === BLOCK.TORCH ? 'torch' : (meta?.isBow ? 'bow' : meta?.toolStyle);
-      if (style === 'pickaxe') addPart(0.38, 0.12, 0.11, 0.18, 0.22);
+      if (style === 'pickaxe') addPart(0.38, 0.12, 0.11, 0.18, 0.22, headMat, -Math.PI * 0.25);
       else if (style === 'axe') addPart(0.17, 0.29, 0.12, 0.20, 0.22);
-      else if (style === 'shovel') addPart(0.19, 0.22, 0.09, 0.14, 0.22, headMat, -0.18);
-      else if (style === 'sword') { addPart(0.09, 0.44, 0.06, 0.13, 0.24, headMat, -0.2); addPart(0.24, 0.05, 0.08, 0.1, 0.02, woodMat, -0.2); }
+      else if (style === 'shovel') addPart(0.19, 0.22, 0.09, 0.19, 0.19, headMat, -Math.PI * 0.25);
+      else if (style === 'sword') { addPart(0.08, 0.36, 0.05, 0.30, 0.30, headMat, -Math.PI * 0.25); addPart(0.22, 0.05, 0.07, 0.14, 0.14, woodMat, -Math.PI * 0.25); }
       else if (style === 'hoe') addPart(0.30, 0.075, 0.10, 0.18, 0.25, headMat, -0.1);
       else if (style === 'hammer') addPart(0.36, 0.18, 0.16, 0.18, 0.27);
-      else if (style === 'chisel') addPart(0.14, 0.18, 0.11, 0.15, 0.27);
-      else if (style === 'shears') { addPart(0.05, 0.36, 0.05, -0.05, 0.18, headMat, -0.5); addPart(0.05, 0.36, 0.05, 0.05, 0.18, headMat, 0.5); }
-      else if (style === 'sickle') { addPart(0.28, 0.07, 0.09, 0.15, 0.28, headMat, -0.45); }
-      else if (style === 'bow') { addPart(0.06, 0.52, 0.04, 0.16, 0.04, headMat, 0); }
+      else if (style === 'chisel') addPart(0.14, 0.18, 0.11, 0.17, 0.2);
+      else if (style === 'shears') { addPart(0.05, 0.36, 0.05, 0.0, 0.2, headMat, -0.5); addPart(0.05, 0.36, 0.05, 0.1, 0.2, headMat, 0.5); }
+      else if (style === 'sickle') addPart(0.28, 0.07, 0.09, 0.17, 0.26, headMat, -0.45);
+      else if (style === 'bow') addPart(0.06, 0.52, 0.04, 0.16, 0.04, headMat, 0);
       else if (style === 'torch') {
         const flameMat = new THREE.MeshLambertMaterial({ color: 0xffad2b, emissive: 0xff6500, emissiveIntensity: 0.7 });
-        addPart(0.11, 0.15, 0.11, 0.17, 0.22, flameMat);
+        addPart(0.11, 0.11, 0.11, 0.2, 0.2, flameMat);
       }
-      toolGroup.scale.set(0.9, 0.9, 0.9);
-      toolGroup.position.set(0, -0.04, 0);
-      this.group.add(toolGroup);
-      this.currentMesh = toolGroup;
+      tool.position.set(0.18, 0.18, 0);      // grip (-0.18,-0.18) -> hand origin
+      wrapper.add(tool);
+      wrapper.scale.setScalar(0.78);
+      wrapper.position.set(0, 0.02, -0.02);
+      wrapper.rotation.set(-0.45, 0.45, 0.10);   // tilt up/forward like vanilla tools
     } else if (meta?.isItem || meta?.cross) {
       const iconCanvas = this.atlas.iconCanvases[itemId];
       if (!iconCanvas) return;
       const tex = new THREE.CanvasTexture(iconCanvas);
       tex.magFilter = THREE.NearestFilter; tex.minFilter = THREE.NearestFilter; tex.colorSpace = THREE.SRGBColorSpace;
-      const geo = new THREE.PlaneGeometry(0.34, 0.34);
-      const mat = new THREE.MeshBasicMaterial({ map: tex, transparent: true, alphaTest: 0.2, side: THREE.DoubleSide });
-      const mesh = new THREE.Mesh(geo, mat);
-      mesh.rotation.y = 0.45;
-      this.group.add(mesh);
-      this.currentMesh = mesh;
+      const mesh = new THREE.Mesh(new THREE.PlaneGeometry(0.30, 0.30),
+        new THREE.MeshBasicMaterial({ map: tex, transparent: true, alphaTest: 0.2, side: THREE.DoubleSide }));
+      mesh.position.set(0.0, 0.14, -0.02);     // bottom edge sits in the hand
+      wrapper.add(mesh);
+      wrapper.rotation.set(-0.1, 0.6, 0.1);
     } else {
-      // Correctly map each face of the held block using its exact atlas UVs
       const geo = new THREE.BufferGeometry();
       const pos = [], uv = [], col = [], idx = [];
       const isCutout = (itemId === BLOCK.OAK_LEAVES || itemId === BLOCK.GLASS);
-      const s = 0.16;
+      const hs = 0.11;
       for (let f = 0; f < 6; f++) {
         const face = FACES[f];
         const rect = isCutout ? this.world.getCutoutUV(itemId) : this.world.getFaceUV(itemId, f);
         const vs = pos.length / 3;
         for (let c = 0; c < 4; c++) {
           const p = face.corners[c];
-          pos.push((p[0] - 0.5) * s * 2, (p[1] - 0.5) * s * 2, (p[2] - 0.5) * s * 2);
+          pos.push((p[0] - 0.5) * hs * 2, (p[1] - 0.5) * hs * 2, (p[2] - 0.5) * hs * 2);
           uv.push(face.uvs[c][0] === 0 ? rect.u0 : rect.u1, face.uvs[c][1] === 0 ? rect.v0 : rect.v1);
           col.push(face.shade, face.shade, face.shade);
         }
@@ -1797,9 +2149,12 @@ class HeldItemRenderer {
       geo.setIndex(idx);
       const mat = isCutout ? this.atlas.leavesMat : (itemId === BLOCK.WATER ? this.atlas.waterMat : this.atlas.opaqueMat);
       const mesh = new THREE.Mesh(geo, mat);
-      this.group.add(mesh);
-      this.currentMesh = mesh;
+      mesh.position.set(0, 0.10, -0.01);        // cube rests on top of the hand
+      wrapper.add(mesh);
+      wrapper.rotation.set(0.15, 0.7, 0.0);
     }
+    this.mount.add(wrapper);
+    this.currentMesh = wrapper;
   }
 }
 
@@ -2487,7 +2842,7 @@ class DroppedItemManager {
     const mesh = new THREE.Mesh(this.boxGeo, mat);
     mesh.position.set(x, y, z);
     this.scene.add(mesh);
-    this.drops.push({ id: itemId, mesh, tex, mat, vel: new THREE.Vector3((Math.random() - 0.5) * 2.5, 3.2, (Math.random() - 0.5) * 2.5), age: 0 });
+    this.drops.push({ id: itemId, mesh, tex, mat, vel: new THREE.Vector3((Math.random() - 0.5) * 2.5, 3.2, (Math.random() - 0.5) * 2.5), age: 0, onGround: false });
   }
   clearAll() {
     for (const d of this.drops) { this.scene.remove(d.mesh); d.mat.dispose(); d.tex.dispose(); }
@@ -2498,7 +2853,15 @@ class DroppedItemManager {
       const d = this.drops[i]; d.age += dt; d.mesh.rotation.y += dt * 2.4;
       if (!ITEMS_META[this.world.getBlock(d.mesh.position.x, d.mesh.position.y - 0.18, d.mesh.position.z)]?.solid) {
         d.vel.y -= 14 * dt; d.mesh.position.addScaledVector(d.vel, dt);
-      } else { d.vel.set(0, 0, 0); d.mesh.position.y += Math.sin(d.age * 4) * 0.002; }
+        d.onGround = false;
+      } else {
+        if (!d.onGround && d.vel.y < -1.5) {
+          this.sound.playDropImpact(Math.abs(d.vel.y) / 9);
+        }
+        d.onGround = true;
+        d.vel.set(0, 0, 0);
+        d.mesh.position.y += Math.sin(d.age * 4) * 0.002;
+      }
       const target = playerPos.clone().add(new THREE.Vector3(0, 0.8, 0));
       const dist = d.mesh.position.distanceTo(target);
       if (d.age > 0.35 && dist < 2.6) d.mesh.position.addScaledVector(target.sub(d.mesh.position).normalize(), dt * 8.5);
@@ -2691,15 +3054,9 @@ class InventorySystem {
 
   resetStarterKit() {
     this.slots.fill(null);
-    this.slots[0] = { id: ITEM.STONE_PICKAXE, count: 1 };
-    this.slots[1] = { id: ITEM.STONE_SWORD, count: 1 };
-    this.slots[2] = { id: BLOCK.OAK_LOG, count: 6 };
-    this.slots[3] = { id: BLOCK.COBBLESTONE, count: 16 };
-    this.slots[4] = { id: BLOCK.TORCH, count: 12 };
-    this.slots[5] = { id: ITEM.BREAD, count: 4 };
-    this.slots[6] = { id: ITEM.WHEAT, count: 12 };
-    this.slots[7] = { id: ITEM.CARROT, count: 12 };
-    this.slots[8] = { id: ITEM.WHEAT_SEEDS, count: 8 };
+    this.craftGrid.fill(null);
+    this.craftResult = null;
+    this.heldItem = null;
   }
 
   getChest(key) {
@@ -2785,15 +3142,16 @@ class InventorySystem {
   }
 
   takeCraftOutput() {
-    if (!this.craftResult) return;
+    if (!this.craftResult) return false;
     const out = this.craftResult;
     if (!this.heldItem) this.heldItem = { id: out.id, count: out.count };
     else if (this.heldItem.id === out.id && ITEMS_META[out.id]?.stackable !== false && this.heldItem.count + out.count <= 64) this.heldItem.count += out.count;
-    else return;
+    else return false;
     for (let i = 0; i < this.craftSize * this.craftSize; i++) {
       if (this.craftGrid[i]) { this.craftGrid[i].count--; if (this.craftGrid[i].count <= 0) this.craftGrid[i] = null; }
     }
     this.evaluateCrafting();
+    return true;
   }
 
   getCapacityFor(id) {
@@ -2875,7 +3233,7 @@ class PlayerController {
       return null;
     };
     const sx = Math.floor(this.spawnPoint.x), sz = Math.floor(this.spawnPoint.z);
-    this.world.updateChunksAround(sx, sz);
+    this.world.updateChunksAround(sx, sz, true);
     const spot = findSafe(sx, sz, 7) || findSafe(8, 8, 8);
     if (spot) this.pos.set(spot.x, spot.y, spot.z);
     else this.pos.set(sx + 0.5, CHUNK_H - 4, sz + 0.5);
@@ -2896,6 +3254,15 @@ class PlayerController {
   }
 
   update(dt, active) {
+    // Hold still until the ground under us has actually been drawn (prevents floating / falling through unbuilt terrain)
+    if (!this.world.isReadyAt(this.pos.x, this.pos.z)) {
+      this.vel.set(0, 0, 0);
+      this.camera.position.set(this.pos.x, this.pos.y + this.eyeHeight, this.pos.z);
+      this.camera.rotation.order = 'YXZ'; this.camera.rotation.y = this.yaw; this.camera.rotation.x = this.pitch;
+      return;
+    }
+    // Rescue from falling out of the world
+    if (this.pos.y < -8) { this.spawnOnSurface(); return; }
     const feetBlock = this.world.getBlock(this.pos.x, this.pos.y + 0.2, this.pos.z);
     const headBlock = this.world.getBlock(this.pos.x, this.pos.y + this.eyeHeight, this.pos.z);
     this.inWater = (feetBlock === BLOCK.WATER);
@@ -3021,6 +3388,7 @@ class VoxelGame {
 
     this.scene = new THREE.Scene();
     this.camera = new THREE.PerspectiveCamera(72, window.innerWidth / window.innerHeight, 0.1, 145);
+    this.scene.add(this.camera); // required so the first-person hand/held item (camera children) render
 
     this.sound = new SoundEngine();
     this.atlas = new TextureAtlasBuilder();
@@ -3028,6 +3396,7 @@ class VoxelGame {
 
     this.world = new VoxelWorld(this.scene, this.atlas, 42069);
     this.inventory = new InventorySystem(this.atlas, () => this.renderUI());
+    this.inventory.onCraft = () => this.trackProgress("craft", 1);
     this.heldRenderer = new HeldItemRenderer(this.camera, this.atlas, this.world);
     this.particles = new ParticleSystem(this.scene);
     this.drops = new DroppedItemManager(this.scene, this.world, this.atlas, this.sound, this.inventory);
@@ -3078,6 +3447,10 @@ class VoxelGame {
     this.debugOpen = false;
     this.fps = 60; this.frameCount = 0; this.fpsTimer = 0;
     this.hunger = 20; this.xp = 0; this.xpLevel = 0;
+    this.progress = { blocksMined: 0, blocksPlaced: 0, crafted: 0, hostilesKilled: 0, animalsBred: 0, oresMined: 0, biomesDiscovered: [], completedQuests: [], achievements: [] };
+    this.mouseSensitivity = Math.max(0.0008, Math.min(0.005, Number(localStorage.getItem('voxelcraft-sensitivity')) || 0.0024));
+    this.hudTimer = 0; this.minimapTimer = 0; this.lastBiome = '';
+    this.paused = false; this.journalOpen = false; this.settingsOpen = false; this.startedSession = false; this.pointerLockWasActive = false;
     this.foodTick = 0; this.regenTick = 0; this.cropTick = 0; this.lastSaveAt = 0;
     this.lastSpaceTap = 0;
     this.skipUnloadSave = false;
@@ -3085,36 +3458,28 @@ class VoxelGame {
     this.initUI();
     this.bindEvents();
 
-    this.world.updateChunksAround(this.player.pos.x, this.player.pos.z);
+    this.world.updateChunksAround(this.player.pos.x, this.player.pos.z, true);
     const restored = this.loadGame(false);
     if (!restored) this.player.spawnOnSurface();
-    this.world.updateChunksAround(this.player.pos.x, this.player.pos.z);
+    this.world.updateChunksAround(this.player.pos.x, this.player.pos.z, true);
     this.renderUI();
     this.updateHearts(this.player.health);
     this.updateHunger();
     this.updateOxygen();
     this.updateXP();
+    this.updateWorldHUD(); this.drawMinimap(); this.updateJournal();
     this.populateNearbyEntities();
 
     this.lastTime = performance.now();
     this.scheduleNextFrame();
   }
 
+  // Always schedule with requestAnimationFrame. The old GPU-fence polling path could wait forever
+  // on some drivers and silently stop the game after the very first frame.
   scheduleNextFrame() {
-    const tick = (now) => this.loop(now || performance.now());
-    if (isSoftwareGl && typeof this.renderer.getContext()?.fenceSync === 'function') {
-      const gl = this.renderer.getContext();
-      const sync = gl.fenceSync(gl.SYNC_GPU_COMMANDS_COMPLETE, 0);
-      gl.flush();
-      const poll = () => {
-        const state = sync && gl.getSyncParameter(sync, gl.SYNC_STATUS);
-        if (state === gl.UNSIGNALED) setTimeout(poll, 5);
-        else { if (sync) gl.deleteSync(sync); setTimeout(() => tick(performance.now()), 60); }
-      };
-      setTimeout(poll, 5);
-    } else {
-      requestAnimationFrame(tick);
-    }
+    if (this._framePending) return;
+    this._framePending = true;
+    requestAnimationFrame((now) => { this._framePending = false; this.loop(now || performance.now()); });
   }
 
   setGameMode(creative) {
@@ -3282,6 +3647,7 @@ class VoxelGame {
     const reqTools = Array.isArray(meta.tool) ? meta.tool : [meta.tool];
     if (heldTool?.toolType && reqTools.includes(heldTool.toolType)) speedMult = heldTool.speedMult || 1.0;
 
+    this.heldRenderer.triggerSwingIfIdle();
     this.miningProgress += (dt * speedMult) / meta.hardness;
     this.hitSoundTimer += dt;
     if (this.hitSoundTimer >= 0.24) { this.hitSoundTimer = 0; this.sound.playHit(); }
@@ -3342,7 +3708,7 @@ class VoxelGame {
     }
 
     if (!hit) return;
-    if (hit.id === BLOCK.CRAFTING_TABLE) { this.openInventory('craft', 3); return; }
+    if (hit.id === BLOCK.CRAFTING_TABLE) { this.sound.playAnvil(); this.openInventory('craft', 3); return; }
     if (hit.id === BLOCK.CHEST) { this.activeChestKey = `${hit.x},${hit.y},${hit.z}`; this.openInventory('chest'); return; }
     if (hit.id === BLOCK.FURNACE) { this.activeFurnaceKey = `${hit.x},${hit.y},${hit.z}`; this.openInventory('furnace'); return; }
     if (hit.id === BLOCK.TNT) {
@@ -3616,6 +3982,7 @@ class VoxelGame {
     this.moonDisc.position.copy(cam).addScaledVector(sunDir.clone().negate(), 108);
     this.sunDisc.visible = sunY > -0.16; this.sunGlow.visible = sunY > -0.16;
     this.moonDisc.visible = sunY < 0.18;
+    if (this.atlas.waterMat.uniforms?.uSunDirection) this.atlas.waterMat.uniforms.uSunDirection.value.copy(sunDir);
     this.sunLight.position.copy(cam).addScaledVector(sunDir, 75);
     this.sunLight.target.position.copy(cam);
     this.skyMaterial.uniforms.uDay.value = dayFactor;
@@ -3634,7 +4001,7 @@ class VoxelGame {
     document.getElementById('save-world-btn').addEventListener('click', () => this.saveGame(true));
     document.getElementById('load-world-btn').addEventListener('click', () => {
       if (this.loadGame(true)) {
-        this.world.updateChunksAround(this.player.pos.x, this.player.pos.z);
+        this.world.updateChunksAround(this.player.pos.x, this.player.pos.z, true);
         this.populateNearbyEntities();
         this.renderUI(); this.updateHearts(this.player.health); this.updateHunger(); this.updateOxygen(); this.updateXP();
       } else this.showSaveStatus('No saved world found');
@@ -3719,7 +4086,14 @@ class VoxelGame {
     this.furnaceFuelEl.id = 'furnace-fuel';
 
     this.craftOutEl = document.getElementById('craft-output');
-    this.craftOutEl.addEventListener('mousedown', (e) => { e.preventDefault(); this.inventory.takeCraftOutput(); this.renderUI(); });
+    this.craftOutEl.addEventListener('mousedown', (e) => {
+      e.preventDefault();
+      if (this.inventory.takeCraftOutput()) {
+        if (this.inventory.craftSize === 3) this.sound.playAnvil();
+        else this.sound.playPickup();
+      }
+      this.renderUI();
+    });
 
     this.buildCreativeCatalog();
     this.renderToolRecipeBook();
@@ -3944,13 +4318,15 @@ class VoxelGame {
     this.inventory.chests.clear(); this.inventory.furnaces.clear();
     this.inventory.resetStarterKit();
     this.player.health = 20; this.player.oxygen = 20; this.hunger = 20; this.xp = 0; this.xpLevel = 0;
+    this.progress = { blocksMined: 0, blocksPlaced: 0, crafted: 0, hostilesKilled: 0, animalsBred: 0, oresMined: 0, biomesDiscovered: [], completedQuests: [], achievements: [] };
     this.worldTime = 0.22; this.dayN = 1;
     this.player.spawnPoint.set(8.5, 32, 8.5);
-    this.world.updateChunksAround(8.5, 8.5);
+    this.world.updateChunksAround(8.5, 8.5, true);
     this.player.spawnOnSurface();
-    this.world.updateChunksAround(this.player.pos.x, this.player.pos.z);
+    this.world.updateChunksAround(this.player.pos.x, this.player.pos.z, true);
     this.populateNearbyEntities();
     this.renderUI(); this.updateHearts(20); this.updateHunger(); this.updateOxygen(); this.updateXP();
+    this.lastBiome = ''; this.updateWorldHUD(); this.drawMinimap(); this.updateJournal();
     this.showSaveStatus(`Created world (seed ${seed})`);
   }
 
@@ -4003,7 +4379,7 @@ class VoxelGame {
         inventory: this.inventory.slots, selectedHotbar: this.inventory.selectedHotbar,
         chests: [...this.inventory.chests.entries()],
         furnaces: [...this.inventory.furnaces.entries()],
-        modifications
+        modifications, progress: this.progress
       };
       localStorage.setItem('voxelcraft-world-v3', JSON.stringify(save));
       this.lastSaveAt = performance.now();
@@ -4047,7 +4423,8 @@ class VoxelGame {
       this.inventory.selectedHotbar = save.selectedHotbar ?? 0;
       this.inventory.chests = new Map(save.chests || []);
       this.inventory.furnaces = new Map(save.furnaces || []);
-      this.world.updateChunksAround(this.player.pos.x, this.player.pos.z);
+      this.progress = this.sanitizeProgress(save.progress);
+      this.world.updateChunksAround(this.player.pos.x, this.player.pos.z, true);
       if (showMessage) this.showSaveStatus('World loaded');
       return true;
     } catch { return false; }
@@ -4138,8 +4515,8 @@ class VoxelGame {
       }
       if (!this.isPlaying) return;
       if (this.isLocked || this.dragLooking) {
-        this.player.yaw -= e.movementX * 0.0024;
-        this.player.pitch = Math.max(-Math.PI * 0.495, Math.min(Math.PI * 0.495, this.player.pitch - e.movementY * 0.0024));
+        this.player.yaw -= e.movementX * this.mouseSensitivity;
+        this.player.pitch = Math.max(-Math.PI * 0.495, Math.min(Math.PI * 0.495, this.player.pitch - e.movementY * this.mouseSensitivity));
       }
     });
 
@@ -4219,6 +4596,7 @@ class VoxelGame {
     this.lastTime = now;
 
     if (this.atlas.waterMat.uniforms) this.atlas.waterMat.uniforms.uTime.value = now * 0.001;
+    if (this.atlas.waterMat.uniforms?.uCameraPosition) this.atlas.waterMat.uniforms.uCameraPosition.value.copy(this.camera.position);
     if (this.atlas.lavaMat.uniforms) this.atlas.lavaMat.uniforms.uTime.value = now * 0.001;
 
     this.frameCount++; this.fpsTimer += dt;
@@ -4226,6 +4604,11 @@ class VoxelGame {
 
     if (now - this.lastSaveAt > 45000) this.saveGame(false);
     this.world.updateChunksAround(this.player.pos.x, this.player.pos.z);
+    if (this.isPlaying) {
+      this.hudTimer += dt; this.minimapTimer += dt;
+      if (this.hudTimer >= 0.35) { this.hudTimer = 0; this.updateWorldHUD(); }
+      if (this.minimapTimer >= 0.75) { this.minimapTimer = 0; this.drawMinimap(); }
+    }
 
     if (this.isPlaying && !this.inventoryOpen) {
       this.updateDayNight(dt);
@@ -4253,7 +4636,7 @@ class VoxelGame {
     }
 
     const isMoving = this.isPlaying && !this.inventoryOpen && Math.hypot(this.player.vel.x, this.player.vel.z) > 0.5;
-    this.heldRenderer.update(dt, isMoving, now * 0.01);
+    this.heldRenderer.update(dt, isMoving);
 
     document.getElementById('water-overlay').style.display = this.player.headInWater ? 'block' : 'none';
     document.getElementById('lava-overlay').style.display = this.player.inLava ? 'block' : 'none';
@@ -4286,49 +4669,551 @@ class VoxelGame {
   }
 }
 
+
+
+/* ==========================================================================
+   VOXELCRAFT FUSION LAYER
+   Keeps the feature-rich survival engine while adding persistent progression,
+   exploration HUD, a minimap, pause/settings screens, and achievements.
+   ========================================================================== */
+const VC_QUESTS = [
+  {id:'first_miner',title:'First steps',desc:'Mine 10 blocks from the world.',stat:'blocksMined',goal:10,reward:30},
+  {id:'builder',title:'A place to call home',desc:'Place 20 blocks to shape your shelter.',stat:'blocksPlaced',goal:20,reward:40},
+  {id:'artisan',title:'The maker',desc:'Craft 5 items using your crafting grid.',stat:'crafted',goal:5,reward:55},
+  {id:'night_watch',title:'Night watch',desc:'Defeat 3 hostile creatures.',stat:'hostilesKilled',goal:3,reward:70},
+  {id:'naturalist',title:'The naturalist',desc:'Discover 5 different biomes.',stat:'biomesDiscovered',goal:5,reward:80},
+  {id:'breeder',title:'A growing world',desc:'Breed 2 pairs of animals.',stat:'animalsBred',goal:2,reward:55},
+  {id:'delver',title:'Into the deep',desc:'Mine 8 ore blocks with the correct tool tier.',stat:'oresMined',goal:8,reward:90}
+];
+const VC_ACHIEVEMENTS = [
+  {id:'hello_world',title:'Hello, world',desc:'Mine your first block.',test:p=>p.blocksMined>=1},
+  {id:'crafting_table',title:'Hands-on artisan',desc:'Craft your first item.',test:p=>p.crafted>=1},
+  {id:'first_blood',title:'Monster hunter',desc:'Defeat your first hostile creature.',test:p=>p.hostilesKilled>=1},
+  {id:'together',title:'Life finds a way',desc:'Breed your first animal pair.',test:p=>p.animalsBred>=1},
+  {id:'cartographer',title:'Beyond the horizon',desc:'Discover three biomes.',test:p=>p.biomesDiscovered.length>=3},
+  {id:'architect',title:'Builder of worlds',desc:'Place 50 blocks.',test:p=>p.blocksPlaced>=50},
+  {id:'deep_miner',title:'Into the earth',desc:'Mine eight ores.',test:p=>p.oresMined>=8},
+  {id:'journey',title:'World traveler',desc:'Discover five biomes.',test:p=>p.biomesDiscovered.length>=5}
+];
+const VC_DEFAULT_PROGRESS = () => ({blocksMined:0,blocksPlaced:0,crafted:0,hostilesKilled:0,animalsBred:0,oresMined:0,biomesDiscovered:[],completedQuests:[],achievements:[]});
+
+VoxelGame.prototype.sanitizeProgress = function(raw) {
+  const p = VC_DEFAULT_PROGRESS();
+  if (!raw || typeof raw !== 'object') return p;
+  for (const k of ['blocksMined','blocksPlaced','crafted','hostilesKilled','animalsBred','oresMined']) {
+    const n = Number(raw[k]); p[k] = Number.isFinite(n) ? Math.max(0, Math.floor(n)) : 0;
+  }
+  for (const k of ['biomesDiscovered','completedQuests','achievements']) {
+    if (Array.isArray(raw[k])) p[k] = [...new Set(raw[k].filter(v => typeof v === 'string'))];
+  }
+  // Migrate the earlier Ultimate build's progress field names.
+  if (!p.hostilesKilled && Number.isFinite(Number(raw.zombiesKilled))) p.hostilesKilled = Math.max(0, Math.floor(Number(raw.zombiesKilled)));
+  return p;
+};
+VoxelGame.prototype.toast = function(message, sub='') {
+  const el = document.getElementById('quest-toast'); if (!el) return;
+  el.textContent = sub ? `${message} · ${sub}` : message;
+  el.classList.add('show'); clearTimeout(this.toastTimer);
+  this.toastTimer = setTimeout(() => el.classList.remove('show'), 2600);
+};
+VoxelGame.prototype.trackProgress = function(kind, value) {
+  if (this.isCreative) return;
+  const p = this.progress || (this.progress = VC_DEFAULT_PROGRESS());
+  let xp = 0, reason = '';
+  if (kind === 'mine') {
+    p.blocksMined++; reason = 'Block mined'; xp = 1;
+    if ([BLOCK.COAL_ORE,BLOCK.IRON_ORE,BLOCK.GOLD_ORE,BLOCK.DIAMOND_ORE].includes(value)) { p.oresMined++; xp += 1; }
+  } else if (kind === 'place') { p.blocksPlaced++; xp = 1; reason = 'Block placed'; }
+  else if (kind === 'craft') { p.crafted += Math.max(1, Number(value) || 1); xp = 4; reason = 'Item crafted'; }
+  else if (kind === 'kill') { p.hostilesKilled++; reason = 'Hostile defeated'; }
+  else if (kind === 'breed') { p.animalsBred++; reason = 'Animal bred'; }
+  else if (kind === 'biome' && typeof value === 'string' && !p.biomesDiscovered.includes(value)) {
+    p.biomesDiscovered.push(value); xp = 8; reason = `Discovered ${value}`; this.toast('NEW BIOME DISCOVERED', value);
+  }
+  if (xp) this.gainXp(xp);
+  if (reason && xp) this.toast(`+${xp} XP`, reason);
+  this.checkQuests(); this.checkAchievements(); this.updateJournal(); this.updateProgressUI();
+};
+VoxelGame.prototype.checkQuests = function() {
+  const p = this.progress || VC_DEFAULT_PROGRESS();
+  for (const q of VC_QUESTS) {
+    if (p.completedQuests.includes(q.id)) continue;
+    const current = q.stat === 'biomesDiscovered' ? p.biomesDiscovered.length : (p[q.stat] || 0);
+    if (current >= q.goal) {
+      p.completedQuests.push(q.id);
+      this.toast(`QUEST COMPLETE · ${q.title}`, `Reward: ${q.reward} XP`);
+      this.gainXp(q.reward);
+    }
+  }
+};
+VoxelGame.prototype.checkAchievements = function() {
+  const p = this.progress || VC_DEFAULT_PROGRESS();
+  for (const a of VC_ACHIEVEMENTS) {
+    if (!p.achievements.includes(a.id) && a.test(p)) {
+      p.achievements.push(a.id); this.toast(`ACHIEVEMENT UNLOCKED · ${a.title}`, a.desc);
+    }
+  }
+};
+VoxelGame.prototype.updateProgressUI = function() {
+  if (!this.progress) return;
+  const need = 20 + this.xpLevel * 10;
+  const fill = document.getElementById('xp-fill'); if (fill) fill.style.width = `${Math.min(100, this.xp / need * 100)}%`;
+  const level = document.getElementById('xp-level'); if (level) level.textContent = `LEVEL ${this.xpLevel + 1}`;
+  const count = document.getElementById('xp-count'); if (count) count.textContent = `${this.xp} / ${need} XP`;
+  const active = VC_QUESTS.find(q => !this.progress.completedQuests.includes(q.id));
+  const label = document.getElementById('active-quest');
+  if (label) label.textContent = active ? `${active.title} · ${active.stat === 'biomesDiscovered' ? this.progress.biomesDiscovered.length : this.progress[active.stat]}/${active.goal}` : 'All current quests complete';
+};
+VoxelGame.prototype.updateWorldHUD = function() {
+  if (!this.world || !this.player) return;
+  const biome = this.world.getBiome(Math.floor(this.player.pos.x), Math.floor(this.player.pos.z));
+  if (biome && biome !== this.lastBiome) { this.lastBiome = biome; this.trackProgress('biome', biome); }
+  const hours = (this.worldTime * 24 + 6) % 24;
+  const hh = String(Math.floor(hours)).padStart(2,'0');
+  const mm = String(Math.floor((hours % 1) * 60)).padStart(2,'0');
+  const set = (id, value) => { const el = document.getElementById(id); if (el) el.textContent = value; };
+  set('world-biome', biome || 'Unknown'); set('world-clock', `DAY ${this.dayN || 1} · ${hh}:${mm}`);
+  set('world-coords', `X ${Math.floor(this.player.pos.x)} · Y ${Math.floor(this.player.pos.y)} · Z ${Math.floor(this.player.pos.z)}`);
+  set('world-seed', `SEED ${this.world.seed}`); set('world-weather', (this.weather || 'clear').toUpperCase());
+  set('map-biome', (biome || 'Unknown').toUpperCase()); this.updateProgressUI();
+};
+VoxelGame.prototype.drawMinimap = function() {
+  const canvas = document.getElementById('minimap'); if (!canvas || !this.player || !this.world) return;
+  const ctx = canvas.getContext('2d'); if (!ctx) return;
+  const size = canvas.width, cell = 6, radius = 12;
+  ctx.clearRect(0,0,size,size); ctx.fillStyle = '#142432'; ctx.fillRect(0,0,size,size);
+  const colors = {
+    [BLOCK.GRASS]:'#5b9c48',[BLOCK.DIRT]:'#8b6247',[BLOCK.STONE]:'#777e83',[BLOCK.SAND]:'#d8c58a',
+    [BLOCK.WATER]:'#287f9a',[BLOCK.LAVA]:'#dc5427',[BLOCK.ICE]:'#a9d7e5',[BLOCK.SNOW]:'#e4eef0',
+    [BLOCK.MUD]:'#65503e',[BLOCK.RED_SAND]:'#bd704b',[BLOCK.BASALT]:'#414c55',[BLOCK.OAK_LEAVES]:'#347343',
+    [BLOCK.CACTUS]:'#448b48',[BLOCK.COBBLESTONE]:'#777777',[BLOCK.IRON_ORE]:'#a87867',[BLOCK.GOLD_ORE]:'#d5b34e',
+    [BLOCK.DIAMOND_ORE]:'#43c9d7',[BLOCK.COAL_ORE]:'#3b4145'
+  };
+  const px = Math.floor(this.player.pos.x), pz = Math.floor(this.player.pos.z);
+  for (let dz=-radius; dz<radius; dz++) for (let dx=-radius; dx<radius; dx++) {
+    let top = BLOCK.AIR;
+    for (let y=CHUNK_H-1; y>=0; y--) {
+      const id = this.world.getBlock(px+dx,y,pz+dz);
+      if (id !== BLOCK.AIR) { top = id; break; }
+    }
+    if (top === BLOCK.AIR) continue;
+    ctx.fillStyle = colors[top] || '#687c69'; ctx.fillRect((dx+radius)*cell,(dz+radius)*cell,cell,cell);
+  }
+  ctx.strokeStyle='rgba(223,240,244,.16)';ctx.lineWidth=1;ctx.strokeRect(.5,.5,size-1,size-1);
+  ctx.save();ctx.translate(size/2,size/2);ctx.rotate(-this.player.yaw);ctx.fillStyle='#f5fff0';ctx.strokeStyle='#1b291d';ctx.lineWidth=2;
+  ctx.beginPath();ctx.moveTo(0,-10);ctx.lineTo(6,7);ctx.lineTo(0,4);ctx.lineTo(-6,7);ctx.closePath();ctx.fill();ctx.stroke();ctx.restore();
+};
+VoxelGame.prototype.updateJournal = function() {
+  const p = this.progress; if (!p) return;
+  const stats = document.getElementById('journal-stats'), list = document.getElementById('quest-list');
+  if (!stats || !list) return;
+  stats.innerHTML = '';
+  for (const [label,value] of [['LEVEL',this.xpLevel+1],['BLOCKS MINED',p.blocksMined],['HOSTILES',p.hostilesKilled],['BIOMES',p.biomesDiscovered.length]]) {
+    const el=document.createElement('div');el.className='journal-stat';const b=document.createElement('b');b.textContent=value;
+    const span=document.createElement('span');span.textContent=label;el.append(b,span);stats.append(el);
+  }
+  list.innerHTML = '';
+  for (const q of VC_QUESTS) {
+    const done=p.completedQuests.includes(q.id), current=q.stat==='biomesDiscovered'?p.biomesDiscovered.length:(p[q.stat]||0);
+    const ratio=Math.min(100,current/q.goal*100),row=document.createElement('div');row.className='quest-row';
+    const top=document.createElement('div');top.className='quest-top';const name=document.createElement('span');name.textContent=(done?'✓ ':'')+q.title;
+    const num=document.createElement('em');num.textContent=done?'COMPLETED':`${Math.min(current,q.goal)} / ${q.goal}`;top.append(name,num);
+    const desc=document.createElement('p');desc.textContent=`${q.desc} · Reward ${q.reward} XP`;
+    const track=document.createElement('div');track.className='quest-track';const fill=document.createElement('i');fill.style.width=`${done?100:ratio}%`;
+    track.append(fill);row.append(top,desc,track);list.append(row);
+  }
+  const earned=document.createElement('div');earned.className='quest-row';const top=document.createElement('div');top.className='quest-top';
+  const title=document.createElement('span');title.textContent='Achievements';const total=document.createElement('em');total.textContent=`${p.achievements.length} / ${VC_ACHIEVEMENTS.length}`;
+  top.append(title,total);const desc=document.createElement('p');desc.textContent=p.achievements.length?VC_ACHIEVEMENTS.filter(a=>p.achievements.includes(a.id)).map(a=>a.title).join(' · '):'No achievements unlocked yet. Keep exploring.';
+  earned.append(top,desc);list.append(earned);
+};
+VoxelGame.prototype.pauseGame = function() {
+  if (!this.isPlaying || this.inventoryOpen) return;
+  this.paused=true;this.isPlaying=false;this.isMining=false;this.dragLooking=false;this.mouseFree=false;this.player.keys={};
+  document.getElementById('blocker').style.display='none';
+  document.getElementById('pause-modal').style.display='flex';
+  if (document.pointerLockElement===this.canvas) document.exitPointerLock();
+};
+VoxelGame.prototype.pauseToMenu = function() { this.pauseGame(); };
+VoxelGame.prototype.resumeGame = function() {
+  this.paused=false;this.journalOpen=false;this.settingsOpen=false;this.isPlaying=true;this.mouseFree=true; // becomes false once the pointer lock is granted
+  document.getElementById('pause-modal').style.display='none';document.getElementById('journal-modal').style.display='none';document.getElementById('settings-modal').style.display='none';document.getElementById('blocker').style.display='none';
+  if (!IS_TOUCH) { try { const p=this.canvas.requestPointerLock?.(); if (p?.catch) p.catch(()=>{}); } catch {} }
+};
+VoxelGame.prototype.openJournal = function() {
+  if (!this.isPlaying && !this.paused) return;
+  if (this.isPlaying) this.pauseGame();
+  this.journalOpen=true;this.settingsOpen=false;
+  document.getElementById('pause-modal').style.display='none';document.getElementById('settings-modal').style.display='none';
+  this.updateJournal();document.getElementById('journal-modal').style.display='flex';
+};
+VoxelGame.prototype.closeJournal = function() {
+  this.journalOpen=false;document.getElementById('journal-modal').style.display='none';
+  if (this.paused) document.getElementById('pause-modal').style.display='flex';
+};
+VoxelGame.prototype.openSettings = function() {
+  if (this.isPlaying) this.pauseGame();
+  this.settingsOpen=true;this.journalOpen=false;
+  document.getElementById('pause-modal').style.display='none';document.getElementById('journal-modal').style.display='none';
+  document.getElementById('settings-modal').style.display='flex';
+};
+VoxelGame.prototype.closeSettings = function() {
+  this.settingsOpen=false;document.getElementById('settings-modal').style.display='none';
+  if (this.paused) document.getElementById('pause-modal').style.display='flex';
+};
+VoxelGame.prototype.applySettings = function() {
+  const get = id => document.getElementById(id);
+  const vol=Number(get('volume-setting').value),sens=Number(get('sensitivity-setting').value),quality=Number(get('quality-setting').value),fov=Number(get('fov-setting').value);
+  this.sound.setVolume(vol);this.mouseSensitivity=sens;
+  localStorage.setItem('voxelcraft-volume',String(vol));localStorage.setItem('voxelcraft-sensitivity',String(sens));
+  localStorage.setItem('voxelcraft-quality',String(quality));localStorage.setItem('voxelcraft-fov',String(fov));
+  this.camera.fov=fov;this.camera.updateProjectionMatrix();
+  this.renderer.setPixelRatio(Math.min((window.devicePixelRatio||1)*quality,isSoftwareGl?1:2));
+  this.renderer.setSize(window.innerWidth,window.innerHeight);
+  get('volume-value').textContent=Math.round(vol*100)+'%';get('sensitivity-value').textContent=sens.toFixed(4);get('fov-value').textContent=fov+'°';
+};
+
+// Preserve the advanced core systems and add progression only after a real action succeeds.
+const _vcBreakBlockAt = VoxelGame.prototype.breakBlockAt;
+VoxelGame.prototype.breakBlockAt = function(x,y,z,id) {
+  const wasPresent = this.world.getBlock(x,y,z) === id;
+  _vcBreakBlockAt.call(this,x,y,z,id);
+  if (wasPresent && !this.isCreative && this.world.getBlock(x,y,z) === BLOCK.AIR) this.trackProgress('mine',id);
+};
+const _vcRightClick = VoxelGame.prototype.handleRightClick;
+VoxelGame.prototype.handleRightClick = function(hit) {
+  const active=this.inventory.getActiveItem(),meta=active?ITEMS_META[active.id]:null;
+  let expected=null;
+  if (hit && meta?.toolType==='hoe' && [BLOCK.GRASS,BLOCK.DIRT].includes(hit.id)) expected={x:hit.x,y:hit.y,z:hit.z,id:BLOCK.FARMLAND};
+  else if (hit && meta?.plants && hit.id===BLOCK.FARMLAND) expected={x:hit.x,y:hit.y+1,z:hit.z,id:meta.plants};
+  else if (hit && active && !meta?.isItem && !meta?.toolType) expected={x:hit.x+hit.normal.x,y:hit.y+hit.normal.y,z:hit.z+hit.normal.z,id:active.id};
+  const before=expected?this.world.getBlock(expected.x,expected.y,expected.z):null;
+  _vcRightClick.call(this,hit);
+  if (expected && !this.isCreative && before!==expected.id && this.world.getBlock(expected.x,expected.y,expected.z)===expected.id) this.trackProgress('place',expected.id);
+};
+const _vcCraftOutput = InventorySystem.prototype.takeCraftOutput;
+InventorySystem.prototype.takeCraftOutput = function() {
+  const ok=_vcCraftOutput.call(this);
+  if(ok && typeof this.onCraft==='function') this.onCraft();
+  return ok;
+};
+const _vcDamageMob = MobManager.prototype.damageMob;
+MobManager.prototype.damageMob = function(mob,damage,attackerPos,game=null) {
+  const wasHostile=mob?.kind==='hostile' && mob.hp>0;
+  _vcDamageMob.call(this,mob,damage,attackerPos,game);
+  if(wasHostile && mob.hp<=0) game?.trackProgress?.('kill',mob.type);
+};
+const _vcFeedMob = MobManager.prototype.tryFeedMob;
+MobManager.prototype.tryFeedMob = function(mob,activeItem,inventory,game) {
+  const before=this.mobs.length;
+  const result=_vcFeedMob.call(this,mob,activeItem,inventory,game);
+  if(result && this.mobs.length>before) game?.trackProgress?.('breed',mob?.type);
+  return result;
+};
+const _vcUpdateXP = VoxelGame.prototype.updateXP;
+VoxelGame.prototype.updateXP = function() { _vcUpdateXP.call(this); this.updateProgressUI?.(); this.updateJournal?.(); };
+
+const _vcBindEvents = VoxelGame.prototype.bindEvents;
+VoxelGame.prototype.bindEvents = function() {
+  // Capture these keys before the original controls so Escape never double-toggles a modal.
+  document.addEventListener('keydown', e => {
+    if (document.activeElement?.tagName==='INPUT' || document.activeElement?.tagName==='SELECT') return;
+    if (e.code==='KeyP') { e.preventDefault();e.stopImmediatePropagation();if(this.paused)this.resumeGame();else this.pauseGame(); }
+    else if (e.code==='KeyJ') { e.preventDefault();e.stopImmediatePropagation();if(this.journalOpen)this.closeJournal();else this.openJournal(); }
+    else if (e.code==='Escape' && (this.journalOpen || this.settingsOpen)) { e.preventDefault();e.stopImmediatePropagation();if(this.journalOpen)this.closeJournal();else this.closeSettings(); }
+    else if (e.code==='Escape' && this.inventoryOpen) { e.preventDefault();e.stopImmediatePropagation();this.closeInventory(); }
+    else if (e.code==='Escape' && this.paused) { e.preventDefault();e.stopImmediatePropagation();this.resumeGame(); }   // ESC in pause menu = resume
+  }, true);
+  _vcBindEvents.call(this);
+  const $ = id => document.getElementById(id);
+  $('journal-btn').addEventListener('click',()=>this.openJournal());
+  $('settings-btn').addEventListener('click',()=>this.openSettings());
+  $('resume-btn').addEventListener('click',()=>this.resumeGame());
+  $('pause-journal-btn').addEventListener('click',()=>this.openJournal());
+  $('pause-settings-btn').addEventListener('click',()=>this.openSettings());
+  $('pause-save-btn').addEventListener('click',()=>this.saveGame(true));
+  $('settings-done-btn').addEventListener('click',()=>{this.applySettings();this.closeSettings();});
+  $('journal-close-btn').addEventListener('click',()=>this.closeJournal());
+  $('volume-setting').addEventListener('input',()=>{this.sound.setVolume($('volume-setting').value);$('volume-value').textContent=Math.round(Number($('volume-setting').value)*100)+'%';});
+  $('sensitivity-setting').addEventListener('input',()=>{$('sensitivity-value').textContent=Number($('sensitivity-setting').value).toFixed(4);});
+  $('fov-setting').addEventListener('input',()=>{$('fov-value').textContent=$('fov-setting').value+'°';});
+  $('quality-setting').addEventListener('change',()=>this.applySettings());
+  $('play-btn').addEventListener('click',()=>{this.startedSession=true;},true);
+  // Click while the mouse is free = lock it again (aim mode).
+  this.canvas.addEventListener('mousedown',()=>{
+    if (this.isPlaying && !this.inventoryOpen && this.mouseFree && !IS_TOUCH) { try { const p=this.canvas.requestPointerLock?.(); if (p?.catch) p.catch(()=>{}); } catch {} }
+  });
+  document.addEventListener('pointerlockchange',()=>{
+    if (document.pointerLockElement === this.canvas) { this.pointerLockWasActive = true; this.mouseFree = false; return; }
+    const hadLock = this.pointerLockWasActive; this.pointerLockWasActive = false;
+    // 1st ESC: only release the mouse (game keeps running). 2nd ESC pauses (see keydown handler).
+    if (hadLock && this.startedSession && this.isPlaying && !this.inventoryOpen && !IS_TOUCH) {
+      this.mouseFree = true;
+      this.showSaveStatus?.('Mouse unlocked · ESC again = pause · click = lock mouse');
+    }
+  });
+  const stored = [['volume-setting','voxelcraft-volume'],['sensitivity-setting','voxelcraft-sensitivity'],['quality-setting','voxelcraft-quality'],['fov-setting','voxelcraft-fov']];
+  for(const [control,key] of stored){const val=localStorage.getItem(key);if(val!==null)$(control).value=val;}
+  this.applySettings();this.updateProgressUI();this.updateJournal();
+};
+
+// Keep gameplay completely frozen under pause/journal/settings overlays.
+const _vcLoop = VoxelGame.prototype.loop;
+VoxelGame.prototype.loop = function(now) {
+  if(this.paused) {
+    this.scheduleNextFrame();
+    this.lastTime=now;
+    if(!this.contextLost)this.renderer.render(this.scene,this.camera);
+    return;
+  }
+  _vcLoop.call(this,now);
+};
+
+
 const IS_TOUCH = matchMedia('(pointer:coarse)').matches || ('ontouchstart' in window);
 function setupTouch(g) {
   document.body.classList.add('touch');
   const K = g.player.keys, $ = id => document.getElementById(id);
-  $('play-btn').addEventListener('click', () => {
-    g.sound.init(); g.isPlaying = true; $('blocker').style.display = 'none';
-    try { document.documentElement.requestFullscreen?.().catch(() => {}); } catch {}
-  }, true);
-  const joy = $('joy'), knob = joy.firstElementChild; let jid = null;
-  const jm = t => {
-    const r = joy.getBoundingClientRect(), dx = (t.clientX - r.left - 60) / 50, dy = (t.clientY - r.top - 60) / 50;
-    const m = Math.min(1, Math.hypot(dx, dy)) || 1, n = Math.hypot(dx, dy) || 1, nx = dx / n * m, ny = dy / n * m;
-    knob.style.transform = `translate(${nx * 35}px,${ny * 35}px)`;
-    K.KeyW = ny < -0.3; K.KeyS = ny > 0.3; K.KeyA = nx < -0.3; K.KeyD = nx > 0.3; K.ControlLeft = ny < -0.92;
+  const body = document.body;
+  const modeEl = $('touch-control-mode'), leftyEl = $('touch-left-handed');
+  const sizeEl = $('touch-button-size'), opacityEl = $('touch-joystick-opacity');
+  let mode = localStorage.getItem('voxelcraft-touch-mode') || 'joystick-tap';
+  let lefty = localStorage.getItem('voxelcraft-touch-lefty') === '1';
+  let buttonScale = Number(localStorage.getItem('voxelcraft-touch-button-size') || 1);
+  let joystickOpacity = Number(localStorage.getItem('voxelcraft-touch-joystick-opacity') || .42);
+
+  const applyTouchOptions = (persist = true) => {
+    body.classList.toggle('touch-crosshair', mode.includes('crosshair'));
+    body.classList.toggle('touch-dpad', mode.startsWith('dpad'));
+    body.classList.toggle('touch-lefty', lefty);
+    $('touch-ui').style.setProperty('--touch-btn-scale', String(buttonScale));
+    $('joy').style.setProperty('--joy-alpha', String(joystickOpacity));
+    $('joy').style.background = `rgba(235,245,250,${joystickOpacity})`;
+    $('touch-tip').textContent = mode === 'joystick-crosshair'
+      ? 'AIM WITH CROSSHAIR · TAP ACTION BUTTON'
+      : 'DRAG TO LOOK · TAP TO USE · HOLD TO MINE';
+    if (modeEl) modeEl.value = mode;
+    if (leftyEl) leftyEl.checked = lefty;
+    if (sizeEl) sizeEl.value = String(buttonScale);
+    if (opacityEl) opacityEl.value = String(joystickOpacity);
+    $('touch-button-size-value').textContent = `${Math.round(buttonScale * 100)}%`;
+    $('touch-joystick-opacity-value').textContent = `${Math.round(joystickOpacity * 100)}%`;
+    if (persist) {
+      localStorage.setItem('voxelcraft-touch-mode', mode);
+      localStorage.setItem('voxelcraft-touch-lefty', lefty ? '1' : '0');
+      localStorage.setItem('voxelcraft-touch-button-size', String(buttonScale));
+      localStorage.setItem('voxelcraft-touch-joystick-opacity', String(joystickOpacity));
+    }
   };
-  joy.addEventListener('touchstart', e => { e.preventDefault(); jid = e.changedTouches[0].identifier; jm(e.changedTouches[0]); }, { passive: false });
-  joy.addEventListener('touchmove', e => { e.preventDefault(); for (const t of e.changedTouches) if (t.identifier === jid) jm(t); }, { passive: false });
-  const je = e => { for (const t of e.changedTouches) if (t.identifier === jid) { jid = null; knob.style.transform = ''; K.KeyW = K.KeyS = K.KeyA = K.KeyD = K.ControlLeft = false; } };
-  joy.addEventListener('touchend', je); joy.addEventListener('touchcancel', je);
-  let lid = null, lx = 0, ly = 0;
-  g.canvas.addEventListener('touchstart', e => { if (lid !== null || g.inventoryOpen) return; const t = e.changedTouches[0]; lid = t.identifier; lx = t.clientX; ly = t.clientY; }, { passive: true });
-  g.canvas.addEventListener('touchmove', e => { e.preventDefault(); for (const t of e.changedTouches) if (t.identifier === lid) { g.player.yaw -= (t.clientX - lx) * 0.0055; g.player.pitch = Math.max(-1.55, Math.min(1.55, g.player.pitch - (t.clientY - ly) * 0.0055)); lx = t.clientX; ly = t.clientY; } }, { passive: false });
-  const le = e => { for (const t of e.changedTouches) if (t.identifier === lid) lid = null; };
-  g.canvas.addEventListener('touchend', le); g.canvas.addEventListener('touchcancel', le);
-  const act = {
-    mine: [() => { if (!g.inventoryOpen) g.handleLeftClick(); }, () => { g.isMining = false; }],
-    place: [() => { if (!g.inventoryOpen) g.handleRightClick(g.raycastVoxel(5)); }],
-    jump: [() => { K.Space = true; }, () => { K.Space = false; }],
-    sneak: [() => { K.ShiftLeft = !K.ShiftLeft; $('b-sneak').classList.toggle('on', K.ShiftLeft); }],
-    inv: [() => { g.inventoryOpen ? g.closeInventory() : g.openInventory('craft', 2); }],
-    eat: [() => { if (!g.inventoryOpen) g.eatSelectedFood(); }]
+  applyTouchOptions(false);
+  modeEl?.addEventListener('change', () => { mode = modeEl.value; applyTouchOptions(); });
+  leftyEl?.addEventListener('change', () => { lefty = leftyEl.checked; applyTouchOptions(); });
+  sizeEl?.addEventListener('input', () => { buttonScale = Number(sizeEl.value); applyTouchOptions(); });
+  opacityEl?.addEventListener('input', () => { joystickOpacity = Number(opacityEl.value); applyTouchOptions(); });
+
+  // Left thumb: analog movement. Pushing fully forward sprints, like Minecraft's
+  // optional joystick sprint behaviour. The joystick disappears in D-pad mode.
+  const joy = $('joy'), knob = joy.firstElementChild;
+  let joyPointer = null;
+  const updateJoy = e => {
+    const r = joy.getBoundingClientRect();
+    const dx = (e.clientX - r.left - r.width / 2) / (r.width * .39);
+    const dy = (e.clientY - r.top - r.height / 2) / (r.height * .39);
+    const magnitude = Math.min(1, Math.hypot(dx, dy)) || 1;
+    const length = Math.hypot(dx, dy) || 1;
+    const nx = dx / length * magnitude, ny = dy / length * magnitude;
+    knob.style.transform = `translate(${nx * r.width * .27}px,${ny * r.height * .27}px)`;
+    K.KeyW = ny < -.28; K.KeyS = ny > .28; K.KeyA = nx < -.28; K.KeyD = nx > .28;
+    K.ControlLeft = ny < -.91;
   };
-  document.querySelectorAll('.tb').forEach(b => {
-    const a = act[b.dataset.a];
-    b.addEventListener('touchstart', e => { e.preventDefault(); b.classList.add('on'); a[0](); }, { passive: false });
-    const up = e => { e.preventDefault(); if (b.dataset.a !== 'sneak') b.classList.remove('on'); a[1]?.(); };
-    b.addEventListener('touchend', up, { passive: false }); b.addEventListener('touchcancel', up, { passive: false });
+  joy.addEventListener('pointerdown', e => {
+    if (!g.isPlaying || g.inventoryOpen) return;
+    e.preventDefault(); e.stopPropagation(); joyPointer = e.pointerId;
+    joy.setPointerCapture?.(e.pointerId); updateJoy(e);
   });
-  $('hotbar').addEventListener('touchstart', e => {
-    const sl = e.target.closest('.slot'); if (!sl) return; e.preventDefault();
-    g.inventory.selectedHotbar = [...sl.parentNode.children].indexOf(sl); g.renderUI(); g.showItemLabel();
-  }, { passive: false });
+  joy.addEventListener('pointermove', e => { if (e.pointerId === joyPointer) { e.preventDefault(); updateJoy(e); } });
+  const releaseJoy = e => {
+    if (e.pointerId !== joyPointer) return;
+    joyPointer = null; knob.style.transform = '';
+    K.KeyW = K.KeyS = K.KeyA = K.KeyD = K.ControlLeft = false;
+  };
+  joy.addEventListener('pointerup', releaseJoy); joy.addEventListener('pointercancel', releaseJoy); joy.addEventListener('lostpointercapture', releaseJoy);
+
+  // Optional D-pad mode, matching Bedrock's alternative touch scheme.
+  document.querySelectorAll('.dpad-btn').forEach(btn => {
+    const key = btn.dataset.key;
+    const down = e => { e.preventDefault(); if (!g.isPlaying || g.inventoryOpen) return; btn.classList.add('on'); K[key] = true; btn.setPointerCapture?.(e.pointerId); };
+    const up = e => { e.preventDefault(); btn.classList.remove('on'); K[key] = false; };
+    btn.addEventListener('pointerdown', down); btn.addEventListener('pointerup', up); btn.addEventListener('pointercancel', up); btn.addEventListener('lostpointercapture', up);
+  });
+
+  const getTouchIntent = () => {
+    if (!g.isPlaying || g.inventoryOpen) return 'none';
+    const block = g.raycastVoxel(5.0);
+    const mob = g.mobs.raycastMob(g.camera, 4.8);
+    const mobFirst = mob && (!block || g.mobDistanceAlongView(mob) <= block.dist + .05);
+    const held = g.inventory.getActiveItem();
+    const meta = held ? ITEMS_META[held.id] : null;
+    if (mobFirst) {
+      if (meta?.isBow || held?.id === ITEM.WHEAT || held?.id === ITEM.CARROT) return 'use';
+      return 'attack';
+    }
+    if (!block) {
+      if (meta?.isBow) return 'use';
+      if (meta?.food) return 'eat';
+      return 'none';
+    }
+    if ([BLOCK.CRAFTING_TABLE, BLOCK.CHEST, BLOCK.FURNACE, BLOCK.TNT, BLOCK.BED].includes(block.id)) return 'use';
+    if (meta?.isBow || meta?.plants || meta?.food || held?.id === ITEM.WHEAT || held?.id === ITEM.CARROT) return meta?.food ? 'eat' : 'use';
+    if (meta?.toolType === 'hoe' && [BLOCK.GRASS, BLOCK.DIRT].includes(block.id)) return 'use';
+    if (held && !meta?.isItem && meta?.solid) return 'use';
+    return 'mine';
+  };
+  const performTapUse = () => {
+    const intent = getTouchIntent();
+    const hit = g.raycastVoxel(5.0);
+    if (intent === 'attack') g.handleLeftClick();
+    else if (intent === 'use') g.handleRightClick(hit);
+    else if (intent === 'eat') g.eatSelectedFood();
+  };
+
+  // Right-thumb free-look surface. A stationary short tap uses/places/feeds;
+  // holding on a normal block mines it; holding and dragging only rotates view.
+  const activePointers = new Map();
+  const HOLD_TO_MINE_MS = 190;
+  const LOOK_THRESHOLD = 8;
+  const clearHold = state => { if (state.timer) { clearTimeout(state.timer); state.timer = null; } };
+  g.canvas.addEventListener('pointerdown', e => {
+    if (e.pointerType === 'mouse' || !g.isPlaying || g.inventoryOpen || g.paused) return;
+    const state = { id:e.pointerId, x:e.clientX, y:e.clientY, lastX:e.clientX, lastY:e.clientY, moved:false, holdStarted:false, timer:null };
+    activePointers.set(e.pointerId, state);
+    try { g.canvas.setPointerCapture(e.pointerId); } catch {}
+    if (!mode.includes('crosshair')) {
+      state.timer = setTimeout(() => {
+        if (!activePointers.has(e.pointerId) || state.moved || g.inventoryOpen || !g.isPlaying) return;
+        if (getTouchIntent() === 'mine') {
+          state.holdStarted = true;
+          g.handleLeftClick();
+        }
+      }, HOLD_TO_MINE_MS);
+    }
+  }, { passive:false });
+  g.canvas.addEventListener('pointermove', e => {
+    const state = activePointers.get(e.pointerId);
+    if (!state || !g.isPlaying || g.inventoryOpen) return;
+    const total = Math.hypot(e.clientX - state.x, e.clientY - state.y);
+    if (total > LOOK_THRESHOLD) {
+      state.moved = true; clearHold(state);
+      const dx = e.clientX - state.lastX, dy = e.clientY - state.lastY;
+      const sens = Number(localStorage.getItem('voxelcraft-touch-sensitivity') || g.mouseSensitivity * 2.3);
+      g.player.yaw -= dx * sens;
+      g.player.pitch = Math.max(-1.55, Math.min(1.55, g.player.pitch - dy * sens));
+    }
+    state.lastX = e.clientX; state.lastY = e.clientY;
+    e.preventDefault();
+  }, { passive:false });
+  const endLook = e => {
+    const state = activePointers.get(e.pointerId); if (!state) return;
+    clearHold(state); activePointers.delete(e.pointerId);
+    if (!state.moved && !state.holdStarted && !mode.includes('crosshair')) performTapUse();
+    if (state.holdStarted) { g.isMining = false; g.miningProgress = 0; }
+  };
+  g.canvas.addEventListener('pointerup', endLook); g.canvas.addEventListener('pointercancel', endLook); g.canvas.addEventListener('lostpointercapture', endLook);
+
+  // In crosshair mode one contextual action button replaces separate Mine/Place/Eat buttons.
+  const actionBtn = $('b-touch-action');
+  const refreshAction = () => {
+    if (mode !== 'joystick-crosshair' || !g.isPlaying || g.inventoryOpen || g.paused) { actionBtn.style.display = 'none'; return; }
+    const intent = getTouchIntent();
+    actionBtn.style.display = intent === 'none' ? 'none' : 'flex';
+    actionBtn.textContent = ({mine:'MINE',attack:'HIT',use:'USE',eat:'EAT'})[intent] || 'USE';
+    actionBtn.dataset.intent = intent;
+  };
+  const actionDown = e => {
+    e.preventDefault(); e.stopPropagation();
+    if (!g.isPlaying || g.inventoryOpen) return;
+    const intent = getTouchIntent(); actionBtn.classList.add('on');
+    if (intent === 'mine' || intent === 'attack') {
+      g.handleLeftClick();
+      actionBtn.dataset.holding = intent === 'mine' ? 'mine' : 'attack';
+    } else if (intent === 'use') g.handleRightClick(g.raycastVoxel(5.0));
+    else if (intent === 'eat') g.eatSelectedFood();
+    actionBtn.setPointerCapture?.(e.pointerId);
+  };
+  const actionUp = e => {
+    e.preventDefault(); actionBtn.classList.remove('on');
+    if (actionBtn.dataset.holding === 'mine') { g.isMining = false; g.miningProgress = 0; }
+    delete actionBtn.dataset.holding;
+  };
+  actionBtn.addEventListener('pointerdown', actionDown); actionBtn.addEventListener('pointerup', actionUp); actionBtn.addEventListener('pointercancel', actionUp); actionBtn.addEventListener('lostpointercapture', actionUp);
+  const actionTimer = setInterval(refreshAction, 140);
+  window.addEventListener('beforeunload', () => clearInterval(actionTimer), { once:true });
+
+  // The only persistent action buttons are jump and sneak; food is contextual.
+  const jump = $('b-jump');
+  let lastJumpTap = 0;
+  const jumpDown = e => {
+    e.preventDefault(); if (!g.isPlaying || g.inventoryOpen) return;
+    jump.classList.add('on');
+    const now = performance.now();
+    if (g.isCreative && now - lastJumpTap < 300) { g.player.flying = !g.player.flying; g.player.vel.y = 0; }
+    lastJumpTap = now; K.Space = true; jump.setPointerCapture?.(e.pointerId);
+  };
+  const jumpUp = e => { e.preventDefault(); jump.classList.remove('on'); K.Space = false; };
+  jump.addEventListener('pointerdown', jumpDown); jump.addEventListener('pointerup', jumpUp); jump.addEventListener('pointercancel', jumpUp); jump.addEventListener('lostpointercapture', jumpUp);
+
+  const sneak = $('b-sneak');
+  sneak.addEventListener('pointerdown', e => {
+    e.preventDefault(); if (!g.isPlaying || g.inventoryOpen) return;
+    K.ShiftLeft = !K.ShiftLeft; sneak.classList.toggle('on', K.ShiftLeft);
+  });
+
+  $('mobile-bag').addEventListener('pointerdown', e => {
+    e.preventDefault(); e.stopPropagation();
+    if (!g.isPlaying) return;
+    g.inventoryOpen ? g.closeInventory() : g.openInventory('craft', 2);
+  });
+
+  // Touch-selecting the hotbar remains a single-tap operation.
+  $('hotbar').addEventListener('pointerdown', e => {
+    if (!g.isPlaying) return;
+    const sl = e.target.closest('.slot'); if (!sl) return;
+    e.preventDefault();
+    g.inventory.selectedHotbar = [...sl.parentNode.children].indexOf(sl);
+    g.renderUI(); g.showItemLabel();
+  });
+
+  window.addEventListener('blur', () => {
+    for (const state of activePointers.values()) clearHold(state);
+    activePointers.clear();
+    K.KeyW = K.KeyS = K.KeyA = K.KeyD = K.ControlLeft = K.Space = K.ShiftLeft = false;
+    g.isMining = false; jump.classList.remove('on'); sneak.classList.remove('on');
+  });
 }
+
+// Crash-proof main loop: one bad frame must never stop the game. Errors are shown on screen.
+function vcShowError(msg) {
+  let box = document.getElementById('vc-error-box');
+  if (!box) {
+    box = document.createElement('div'); box.id = 'vc-error-box';
+    box.style.cssText = 'position:fixed;left:8px;bottom:8px;max-width:70vw;z-index:99999;background:#400c;color:#ffd0d0;font:12px monospace;padding:6px 10px;border-radius:6px;white-space:pre-wrap;pointer-events:none';
+    document.body.appendChild(box);
+  }
+  box.textContent = 'Game error (please report): ' + msg;
+}
+window.addEventListener('error', (e) => vcShowError(e.message + (e.lineno ? ' @' + e.lineno : '')));
+window.addEventListener('unhandledrejection', (e) => vcShowError(String(e.reason && e.reason.message || e.reason)));
+const _vcLoopSafe = VoxelGame.prototype.loop;
+VoxelGame.prototype.loop = function(now) {
+  this._lastLoopAt = performance.now();
+  try { _vcLoopSafe.call(this, now); }
+  catch (err) { console.error(err); vcShowError(err && err.message ? err.message : String(err)); this.scheduleNextFrame(); }
+};
+setInterval(() => {
+  const g = window.game;
+  if (!g || document.hidden) return;
+  if (performance.now() - (g._lastLoopAt || 0) > 1500) { g._framePending = false; g.lastTime = performance.now(); g.scheduleNextFrame(); }
+}, 1000);
 
 window.addEventListener('DOMContentLoaded', () => {
   const g = window.game = new VoxelGame();
