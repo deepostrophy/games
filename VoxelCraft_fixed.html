@@ -694,7 +694,8 @@ const BLOCK = {
   OBSIDIAN: 46, LAVA: 47, BED: 48, TORCH: 49,
   WHEAT_0: 50, WHEAT_1: 51, WHEAT_2: 52, WHEAT_3: 53,
   CARROT_0: 54, CARROT_1: 55, CARROT_2: 56, CARROT_3: 57,
-  TALL_GRASS: 58, FLOWER_RED: 59, FLOWER_YELLOW: 60
+  TALL_GRASS: 58, FLOWER_RED: 59, FLOWER_YELLOW: 60,
+  BIRCH_PLANKS: 61, DARK_PLANKS: 62, POLISHED_GRANITE: 63, POLISHED_DIORITE: 64, POLISHED_ANDESITE: 65, MOSSY_STONE_BRICKS: 66, CRACKED_STONE_BRICKS: 67, SMOOTH_STONE: 68, SMOOTH_SANDSTONE: 69, TERRACOTTA: 70, COAL_BLOCK: 71, IRON_BLOCK: 72, GOLD_BLOCK: 73, DIAMOND_BLOCK: 74, RED_WOOL: 75, YELLOW_WOOL: 76, GREEN_WOOL: 77, BLUE_WOOL: 78, BLACK_WOOL: 79, ICE_BRICKS: 80, PRISMARINE_BRICKS: 81, POLISHED_BASALT: 82, LAMP: 83
 };
 
 const ITEM = {
@@ -759,6 +760,29 @@ const ITEMS_META = {
   [BLOCK.BOOKSHELF]:      { name: 'Bookshelf',         solid: true,  transparent: false, hardness: 1.00, tool: 'axe',     drop: BLOCK.BOOKSHELF },
   [BLOCK.BED]:            { name: 'Bed',               solid: true,  transparent: true,  hardness: 0.45, tool: 'axe',     drop: BLOCK.BED, customBox: true },
   [BLOCK.TORCH]:          { name: 'Torch',             solid: false, transparent: true,  hardness: 0.15, tool: 'axe',     drop: BLOCK.TORCH, customTorch: true, emissive: 0xffa63a },
+  [BLOCK.BIRCH_PLANKS]: { name: 'Birch Planks', solid: true, transparent: false, hardness: 0.9, tool: 'axe', drop: BLOCK.BIRCH_PLANKS },
+  [BLOCK.DARK_PLANKS]: { name: 'Dark Oak Planks', solid: true, transparent: false, hardness: 0.9, tool: 'axe', drop: BLOCK.DARK_PLANKS },
+  [BLOCK.POLISHED_GRANITE]: { name: 'Polished Granite', solid: true, transparent: false, hardness: 1.7, tool: 'pickaxe', drop: BLOCK.POLISHED_GRANITE },
+  [BLOCK.POLISHED_DIORITE]: { name: 'Polished Diorite', solid: true, transparent: false, hardness: 1.7, tool: 'pickaxe', drop: BLOCK.POLISHED_DIORITE },
+  [BLOCK.POLISHED_ANDESITE]: { name: 'Polished Andesite', solid: true, transparent: false, hardness: 1.7, tool: 'pickaxe', drop: BLOCK.POLISHED_ANDESITE },
+  [BLOCK.MOSSY_STONE_BRICKS]: { name: 'Mossy Stone Bricks', solid: true, transparent: false, hardness: 1.8, tool: 'pickaxe', drop: BLOCK.MOSSY_STONE_BRICKS },
+  [BLOCK.CRACKED_STONE_BRICKS]: { name: 'Cracked Stone Bricks', solid: true, transparent: false, hardness: 1.8, tool: 'pickaxe', drop: BLOCK.CRACKED_STONE_BRICKS },
+  [BLOCK.SMOOTH_STONE]: { name: 'Smooth Stone', solid: true, transparent: false, hardness: 1.8, tool: 'pickaxe', drop: BLOCK.SMOOTH_STONE },
+  [BLOCK.SMOOTH_SANDSTONE]: { name: 'Smooth Sandstone', solid: true, transparent: false, hardness: 1.0, tool: 'pickaxe', drop: BLOCK.SMOOTH_SANDSTONE },
+  [BLOCK.TERRACOTTA]: { name: 'Terracotta', solid: true, transparent: false, hardness: 1.2, tool: 'pickaxe', drop: BLOCK.TERRACOTTA },
+  [BLOCK.COAL_BLOCK]: { name: 'Block of Coal', solid: true, transparent: false, hardness: 2.2, tool: 'pickaxe', drop: BLOCK.COAL_BLOCK },
+  [BLOCK.IRON_BLOCK]: { name: 'Block of Iron', solid: true, transparent: false, hardness: 3.0, tool: 'pickaxe', drop: BLOCK.IRON_BLOCK },
+  [BLOCK.GOLD_BLOCK]: { name: 'Block of Gold', solid: true, transparent: false, hardness: 3.0, tool: 'pickaxe', drop: BLOCK.GOLD_BLOCK },
+  [BLOCK.DIAMOND_BLOCK]: { name: 'Block of Diamond', solid: true, transparent: false, hardness: 3.2, tool: 'pickaxe', drop: BLOCK.DIAMOND_BLOCK },
+  [BLOCK.RED_WOOL]: { name: 'Red Wool', solid: true, transparent: false, hardness: 0.55, tool: 'shears', drop: BLOCK.RED_WOOL },
+  [BLOCK.YELLOW_WOOL]: { name: 'Yellow Wool', solid: true, transparent: false, hardness: 0.55, tool: 'shears', drop: BLOCK.YELLOW_WOOL },
+  [BLOCK.GREEN_WOOL]: { name: 'Green Wool', solid: true, transparent: false, hardness: 0.55, tool: 'shears', drop: BLOCK.GREEN_WOOL },
+  [BLOCK.BLUE_WOOL]: { name: 'Blue Wool', solid: true, transparent: false, hardness: 0.55, tool: 'shears', drop: BLOCK.BLUE_WOOL },
+  [BLOCK.BLACK_WOOL]: { name: 'Black Wool', solid: true, transparent: false, hardness: 0.55, tool: 'shears', drop: BLOCK.BLACK_WOOL },
+  [BLOCK.ICE_BRICKS]: { name: 'Ice Bricks', solid: true, transparent: false, hardness: 0.7, tool: 'pickaxe', drop: BLOCK.ICE_BRICKS },
+  [BLOCK.PRISMARINE_BRICKS]: { name: 'Prismarine Bricks', solid: true, transparent: false, hardness: 1.8, tool: 'pickaxe', drop: BLOCK.PRISMARINE_BRICKS },
+  [BLOCK.POLISHED_BASALT]: { name: 'Polished Basalt', solid: true, transparent: false, hardness: 2.0, tool: 'pickaxe', drop: BLOCK.POLISHED_BASALT },
+  [BLOCK.LAMP]: { name: 'Lamp', solid: true, transparent: false, hardness: 0.5, tool: 'pickaxe', drop: BLOCK.LAMP, emissive: 0xffd98a },
   [BLOCK.WHEAT_0]:        { name: 'Wheat Sprout',      solid: false, transparent: true,  hardness: 0.12, tool: 'sickle',  drop: ITEM.WHEAT_SEEDS, cross: true, crop: 'wheat', stage: 0 },
   [BLOCK.WHEAT_1]:        { name: 'Wheat Crop',        solid: false, transparent: true,  hardness: 0.12, tool: 'sickle',  drop: ITEM.WHEAT_SEEDS, cross: true, crop: 'wheat', stage: 1 },
   [BLOCK.WHEAT_2]:        { name: 'Wheat Crop',        solid: false, transparent: true,  hardness: 0.12, tool: 'sickle',  drop: ITEM.WHEAT_SEEDS, cross: true, crop: 'wheat', stage: 2 },
@@ -1125,6 +1149,32 @@ class TextureAtlasBuilder {
       if (stage === 3) { ctx.fillStyle = '#f2781d'; [4,8,12].forEach(x => ctx.fillRect(x, 13, 2, 3)); }
     });
 
+
+    const wf = (base) => this.createPixelCanvas((ctx) => { ctx.drawImage(base,0,0); ctx.strokeStyle='rgba(0,0,0,0.28)'; ctx.strokeRect(0.5,0.5,15,15); ctx.strokeStyle='rgba(255,255,255,0.22)'; ctx.strokeRect(1.5,1.5,13,13); });
+    const birchPlanksC = this.createPixelCanvas((ctx, px) => { ctx.drawImage(pat('#d9c58a','#b9a56a','#ecdba5',430),0,0); ctx.fillStyle='rgba(90,70,30,0.35)'; [3,7,11,15].forEach(y=>ctx.fillRect(0,y,16,1)); });
+    const darkPlanksC = this.createPixelCanvas((ctx, px) => { ctx.drawImage(pat('#4a3220','#352315','#5e4330',431),0,0); ctx.fillStyle='rgba(0,0,0,0.35)'; [3,7,11,15].forEach(y=>ctx.fillRect(0,y,16,1)); });
+    const polGraniteC = wf(pat('#b0968c','#8a746b','#cfb5aa',432));
+    const polDioriteC = wf(pat('#d5d6d0','#a3a8a2','#f2f2ec',433));
+    const polAndesiteC = wf(pat('#989e9d','#788083','#b5bbb9',434));
+    const mossyBricksC = this.createPixelCanvas((ctx, px) => { ctx.drawImage(stoneBricksC,0,0); for (let y=0;y<16;y++) for (let x=0;x<16;x++) if (this.hash2(x,y,435)>0.78) px(x,y,'#4f8a35'); });
+    const crackedBricksC = this.createPixelCanvas((ctx, px) => { ctx.drawImage(stoneBricksC,0,0); [[3,2],[4,3],[4,4],[5,5],[6,6],[9,8],[10,9],[10,10],[11,11],[12,12],[7,12],[6,13]].forEach(([x,y])=>px(x,y,'#2e3233')); });
+    const smoothStoneC = pat('#9a9c9c','#8c8e8e','#a8aaaa',436);
+    const smoothSandstoneC = pat('#dccf97','#cfc183','#e7dba8',437);
+    const terracottaC = pat('#a2593a','#8a4a30','#b8694a',438);
+    const coalBlockC = wf(pat('#1f1f22','#121214','#34343a',439));
+    const ironBlockC = wf(pat('#dadfe4','#b3bac1','#f4f7fa',440));
+    const goldBlockC = wf(pat('#f0c53a','#d19d1e','#fff08a',441));
+    const diamondBlockC = wf(pat('#4fe3ee','#2bbfcd','#b4fbff',442));
+    const redWoolC = pat('#b12a2a','#951f1f','#cc3a3a',443);
+    const yellowWoolC = pat('#e7c93a','#cdae26','#f6dd60',444);
+    const greenWoolC = pat('#4c8a2a','#3b7120','#62a53b',445);
+    const blueWoolC = pat('#2f50b0','#233f94','#4467cc',446);
+    const blackWoolC = pat('#202024','#141418','#33333a',447);
+    const iceBricksC = this.createPixelCanvas((ctx) => { ctx.drawImage(packedIceC,0,0); ctx.fillStyle='rgba(30,80,110,0.45)'; ctx.fillRect(0,7,16,1); ctx.fillRect(0,15,16,1); ctx.fillRect(7,0,1,8); ctx.fillRect(3,8,1,8); ctx.fillRect(11,8,1,8); });
+    const prisBricksC = this.createPixelCanvas((ctx) => { ctx.drawImage(prismarineC,0,0); ctx.fillStyle='rgba(10,50,50,0.5)'; ctx.fillRect(0,7,16,1); ctx.fillRect(0,15,16,1); ctx.fillRect(7,0,1,8); ctx.fillRect(3,8,1,8); ctx.fillRect(11,8,1,8); });
+    const polBasaltC = wf(pat('#434b52','#2f363c','#68737d',448));
+    const lampC = this.createPixelCanvas((ctx) => { ctx.drawImage(pat('#f6dc83','#e0bf55','#fff3b0',449),0,0); ctx.fillStyle='#5a4524'; ctx.fillRect(0,0,16,2); ctx.fillRect(0,14,16,2); ctx.fillRect(0,0,2,16); ctx.fillRect(14,0,2,16); ctx.fillRect(7,2,2,12); ctx.fillRect(2,7,12,2); });
+
     this.textures = {
       dirt: this.toThreeTex(dirtC), grassTop: this.toThreeTex(grassTopC), grassSide: this.toThreeTex(grassSideC),
       stone: this.toThreeTex(stoneC), coal: this.toThreeTex(coalC), cobble: this.toThreeTex(cobbleC),
@@ -1143,7 +1193,8 @@ class TextureAtlasBuilder {
       prismarine: this.toThreeTex(prismarineC), glowstone: this.toThreeTex(glowstoneC),
       ironOre: this.toThreeTex(ironOreC), goldOre: this.toThreeTex(goldOreC), diamondOre: this.toThreeTex(diamondOreC),
       glass: this.toThreeTex(glassC), wool: this.toThreeTex(woolC), tntSide: this.toThreeTex(tntSideC), tntTop: this.toThreeTex(tntTopC),
-      bookshelf: this.toThreeTex(bookshelfC), obsidian: this.toThreeTex(obsidianC), bedTop: this.toThreeTex(bedTopC)
+      bookshelf: this.toThreeTex(bookshelfC), obsidian: this.toThreeTex(obsidianC), bedTop: this.toThreeTex(bedTopC),
+      birchPlanks: this.toThreeTex(birchPlanksC), darkPlanks: this.toThreeTex(darkPlanksC), polGranite: this.toThreeTex(polGraniteC), polDiorite: this.toThreeTex(polDioriteC), polAndesite: this.toThreeTex(polAndesiteC), mossyBricks: this.toThreeTex(mossyBricksC), crackedBricks: this.toThreeTex(crackedBricksC), smoothStone: this.toThreeTex(smoothStoneC), smoothSandstone: this.toThreeTex(smoothSandstoneC), terracotta: this.toThreeTex(terracottaC), coalBlock: this.toThreeTex(coalBlockC), ironBlock: this.toThreeTex(ironBlockC), goldBlock: this.toThreeTex(goldBlockC), diamondBlock: this.toThreeTex(diamondBlockC), redWool: this.toThreeTex(redWoolC), yellowWool: this.toThreeTex(yellowWoolC), greenWool: this.toThreeTex(greenWoolC), blueWool: this.toThreeTex(blueWoolC), blackWool: this.toThreeTex(blackWoolC), iceBricks: this.toThreeTex(iceBricksC), prisBricks: this.toThreeTex(prisBricksC), polBasalt: this.toThreeTex(polBasaltC), lamp: this.toThreeTex(lampC)
     };
 
     const opaqueSources = {
@@ -1155,7 +1206,8 @@ class TextureAtlasBuilder {
       basalt: basaltC, torch: torchC, redSandstone: redSandstoneC, packedIce: packedIceC, mossBlock: mossBlockC,
       granite: graniteC, diorite: dioriteC, andesite: andesiteC, prismarine: prismarineC, glowstone: glowstoneC,
       ironOre: ironOreC, goldOre: goldOreC, diamondOre: diamondOreC, wool: woolC, tntSide: tntSideC, tntTop: tntTopC,
-      bookshelf: bookshelfC, obsidian: obsidianC, bedTop: bedTopC
+      bookshelf: bookshelfC, obsidian: obsidianC, bedTop: bedTopC,
+      birchPlanks: birchPlanksC, darkPlanks: darkPlanksC, polGranite: polGraniteC, polDiorite: polDioriteC, polAndesite: polAndesiteC, mossyBricks: mossyBricksC, crackedBricks: crackedBricksC, smoothStone: smoothStoneC, smoothSandstone: smoothSandstoneC, terracotta: terracottaC, coalBlock: coalBlockC, ironBlock: ironBlockC, goldBlock: goldBlockC, diamondBlock: diamondBlockC, redWool: redWoolC, yellowWool: yellowWoolC, greenWool: greenWoolC, blueWool: blueWoolC, blackWool: blackWoolC, iceBricks: iceBricksC, prisBricks: prisBricksC, polBasalt: polBasaltC, lamp: lampC
     };
     this.opaqueAtlasCanvas = this.buildAtlasCanvas(opaqueSources, this.uvMap);
     this.opaqueMat = new THREE.MeshLambertMaterial({ vertexColors: true, map: this.toThreeTex(this.opaqueAtlasCanvas) });
@@ -1319,7 +1371,8 @@ class TextureAtlasBuilder {
       furnaceC, hayC, campfireC, polishedC, chiseledC, redSandC, snowC, iceC, clayC, cactusC, mudC, basaltC,
       torchC, redSandstoneC, packedIceC, mossBlockC, graniteC, dioriteC, andesiteC, prismarineC, glowstoneC,
       ironOreC, goldOreC, diamondOreC, glassC, woolC, tntSideC, tntTopC, bookshelfC, obsidianC, bedTopC,
-      tallGrassC, flowerRedC, flowerYellowC
+      tallGrassC, flowerRedC, flowerYellowC,
+      birchPlanksC, darkPlanksC, polGraniteC, polDioriteC, polAndesiteC, mossyBricksC, crackedBricksC, smoothStoneC, smoothSandstoneC, terracottaC, coalBlockC, ironBlockC, goldBlockC, diamondBlockC, redWoolC, yellowWoolC, greenWoolC, blueWoolC, blackWoolC, iceBricksC, prisBricksC, polBasaltC, lampC
     });
   }
 
@@ -1368,6 +1421,7 @@ class TextureAtlasBuilder {
     iso(BLOCK.GLOWSTONE, c.glowstoneC); iso(BLOCK.GLASS, c.glassC); iso(BLOCK.WOOL_WHITE, c.woolC);
     iso(BLOCK.TNT, c.tntTopC, c.tntSideC); iso(BLOCK.BOOKSHELF, c.planksC, c.bookshelfC);
     iso(BLOCK.OBSIDIAN, c.obsidianC); iso(BLOCK.BED, c.bedTopC, c.planksC);
+    iso(BLOCK.BIRCH_PLANKS, c.birchPlanksC); iso(BLOCK.DARK_PLANKS, c.darkPlanksC); iso(BLOCK.POLISHED_GRANITE, c.polGraniteC); iso(BLOCK.POLISHED_DIORITE, c.polDioriteC); iso(BLOCK.POLISHED_ANDESITE, c.polAndesiteC); iso(BLOCK.MOSSY_STONE_BRICKS, c.mossyBricksC); iso(BLOCK.CRACKED_STONE_BRICKS, c.crackedBricksC); iso(BLOCK.SMOOTH_STONE, c.smoothStoneC); iso(BLOCK.SMOOTH_SANDSTONE, c.smoothSandstoneC); iso(BLOCK.TERRACOTTA, c.terracottaC); iso(BLOCK.COAL_BLOCK, c.coalBlockC); iso(BLOCK.IRON_BLOCK, c.ironBlockC); iso(BLOCK.GOLD_BLOCK, c.goldBlockC); iso(BLOCK.DIAMOND_BLOCK, c.diamondBlockC); iso(BLOCK.RED_WOOL, c.redWoolC); iso(BLOCK.YELLOW_WOOL, c.yellowWoolC); iso(BLOCK.GREEN_WOOL, c.greenWoolC); iso(BLOCK.BLUE_WOOL, c.blueWoolC); iso(BLOCK.BLACK_WOOL, c.blackWoolC); iso(BLOCK.ICE_BRICKS, c.iceBricksC); iso(BLOCK.PRISMARINE_BRICKS, c.prisBricksC); iso(BLOCK.POLISHED_BASALT, c.polBasaltC); iso(BLOCK.LAMP, c.lampC);
     this.iconCanvases[BLOCK.TORCH] = c.torchC;
     this.iconCanvases[BLOCK.TALL_GRASS] = c.tallGrassC;
     this.iconCanvases[BLOCK.FLOWER_RED] = c.flowerRedC;
@@ -1717,6 +1771,29 @@ class VoxelWorld {
       case BLOCK.OBSIDIAN: return m.obsidian;
       case BLOCK.BED: return faceIdx === 2 ? m.bedTop : m.planks;
       case BLOCK.TORCH: return m.torch;
+      case BLOCK.BIRCH_PLANKS: return m.birchPlanks;
+      case BLOCK.DARK_PLANKS: return m.darkPlanks;
+      case BLOCK.POLISHED_GRANITE: return m.polGranite;
+      case BLOCK.POLISHED_DIORITE: return m.polDiorite;
+      case BLOCK.POLISHED_ANDESITE: return m.polAndesite;
+      case BLOCK.MOSSY_STONE_BRICKS: return m.mossyBricks;
+      case BLOCK.CRACKED_STONE_BRICKS: return m.crackedBricks;
+      case BLOCK.SMOOTH_STONE: return m.smoothStone;
+      case BLOCK.SMOOTH_SANDSTONE: return m.smoothSandstone;
+      case BLOCK.TERRACOTTA: return m.terracotta;
+      case BLOCK.COAL_BLOCK: return m.coalBlock;
+      case BLOCK.IRON_BLOCK: return m.ironBlock;
+      case BLOCK.GOLD_BLOCK: return m.goldBlock;
+      case BLOCK.DIAMOND_BLOCK: return m.diamondBlock;
+      case BLOCK.RED_WOOL: return m.redWool;
+      case BLOCK.YELLOW_WOOL: return m.yellowWool;
+      case BLOCK.GREEN_WOOL: return m.greenWool;
+      case BLOCK.BLUE_WOOL: return m.blueWool;
+      case BLOCK.BLACK_WOOL: return m.blackWool;
+      case BLOCK.ICE_BRICKS: return m.iceBricks;
+      case BLOCK.PRISMARINE_BRICKS: return m.prisBricks;
+      case BLOCK.POLISHED_BASALT: return m.polBasalt;
+      case BLOCK.LAMP: return m.lamp;
       default: return m.stone;
     }
   }
@@ -3015,6 +3092,31 @@ const RECIPES = [
   { cat:'block', w:2, h:2, pattern:[ITEM.COAL,BLOCK.TORCH,BLOCK.TORCH,BLOCK.SAND], output:{ id:BLOCK.GLOWSTONE, count:2 } },
   { cat:'block', w:3, h:3, pattern:[ITEM.STICK,null,ITEM.STICK,ITEM.COAL,ITEM.COAL,ITEM.COAL,BLOCK.OAK_PLANKS,BLOCK.OAK_PLANKS,BLOCK.OAK_PLANKS], output:{ id:BLOCK.CAMPFIRE, count:1 } },
 
+  // --- Extra building blocks ---
+  { cat:'block', w:2, h:1, pattern:[BLOCK.OAK_PLANKS,BLOCK.SAND], output:{ id:BLOCK.BIRCH_PLANKS, count:2 } },
+  { cat:'block', w:2, h:1, pattern:[BLOCK.OAK_PLANKS,ITEM.COAL], output:{ id:BLOCK.DARK_PLANKS, count:2 } },
+  { cat:'block', w:2, h:2, pattern:[BLOCK.GRANITE,BLOCK.GRANITE,BLOCK.GRANITE,BLOCK.GRANITE], output:{ id:BLOCK.POLISHED_GRANITE, count:4 } },
+  { cat:'block', w:2, h:2, pattern:[BLOCK.DIORITE,BLOCK.DIORITE,BLOCK.DIORITE,BLOCK.DIORITE], output:{ id:BLOCK.POLISHED_DIORITE, count:4 } },
+  { cat:'block', w:2, h:2, pattern:[BLOCK.ANDESITE,BLOCK.ANDESITE,BLOCK.ANDESITE,BLOCK.ANDESITE], output:{ id:BLOCK.POLISHED_ANDESITE, count:4 } },
+  { cat:'block', w:2, h:2, pattern:[BLOCK.BASALT,BLOCK.BASALT,BLOCK.BASALT,BLOCK.BASALT], output:{ id:BLOCK.POLISHED_BASALT, count:4 } },
+  { cat:'block', w:2, h:1, pattern:[BLOCK.STONE_BRICKS,BLOCK.MOSS_BLOCK], output:{ id:BLOCK.MOSSY_STONE_BRICKS, count:1 } },
+  { cat:'block', w:2, h:2, pattern:[BLOCK.PACKED_ICE,BLOCK.PACKED_ICE,BLOCK.PACKED_ICE,BLOCK.PACKED_ICE], output:{ id:BLOCK.ICE_BRICKS, count:4 } },
+  { cat:'block', w:2, h:2, pattern:[BLOCK.PRISMARINE,BLOCK.PRISMARINE,BLOCK.PRISMARINE,BLOCK.PRISMARINE], output:{ id:BLOCK.PRISMARINE_BRICKS, count:4 } },
+  { cat:'block', w:3, h:3, pattern:[ITEM.COAL,ITEM.COAL,ITEM.COAL,ITEM.COAL,ITEM.COAL,ITEM.COAL,ITEM.COAL,ITEM.COAL,ITEM.COAL], output:{ id:BLOCK.COAL_BLOCK, count:1 } },
+  { cat:'block', w:3, h:3, pattern:[ITEM.IRON_INGOT,ITEM.IRON_INGOT,ITEM.IRON_INGOT,ITEM.IRON_INGOT,ITEM.IRON_INGOT,ITEM.IRON_INGOT,ITEM.IRON_INGOT,ITEM.IRON_INGOT,ITEM.IRON_INGOT], output:{ id:BLOCK.IRON_BLOCK, count:1 } },
+  { cat:'block', w:3, h:3, pattern:[ITEM.GOLD_INGOT,ITEM.GOLD_INGOT,ITEM.GOLD_INGOT,ITEM.GOLD_INGOT,ITEM.GOLD_INGOT,ITEM.GOLD_INGOT,ITEM.GOLD_INGOT,ITEM.GOLD_INGOT,ITEM.GOLD_INGOT], output:{ id:BLOCK.GOLD_BLOCK, count:1 } },
+  { cat:'block', w:3, h:3, pattern:[ITEM.DIAMOND,ITEM.DIAMOND,ITEM.DIAMOND,ITEM.DIAMOND,ITEM.DIAMOND,ITEM.DIAMOND,ITEM.DIAMOND,ITEM.DIAMOND,ITEM.DIAMOND], output:{ id:BLOCK.DIAMOND_BLOCK, count:1 } },
+  { cat:'block', w:1, h:1, pattern:[BLOCK.COAL_BLOCK], output:{ id:ITEM.COAL, count:9 } },
+  { cat:'block', w:1, h:1, pattern:[BLOCK.IRON_BLOCK], output:{ id:ITEM.IRON_INGOT, count:9 } },
+  { cat:'block', w:1, h:1, pattern:[BLOCK.GOLD_BLOCK], output:{ id:ITEM.GOLD_INGOT, count:9 } },
+  { cat:'block', w:1, h:1, pattern:[BLOCK.DIAMOND_BLOCK], output:{ id:ITEM.DIAMOND, count:9 } },
+  { cat:'block', w:2, h:1, pattern:[BLOCK.WOOL_WHITE,BLOCK.FLOWER_RED], output:{ id:BLOCK.RED_WOOL, count:1 } },
+  { cat:'block', w:2, h:1, pattern:[BLOCK.WOOL_WHITE,BLOCK.FLOWER_YELLOW], output:{ id:BLOCK.YELLOW_WOOL, count:1 } },
+  { cat:'block', w:2, h:1, pattern:[BLOCK.WOOL_WHITE,BLOCK.MOSS_BLOCK], output:{ id:BLOCK.GREEN_WOOL, count:1 } },
+  { cat:'block', w:2, h:1, pattern:[BLOCK.WOOL_WHITE,BLOCK.PRISMARINE], output:{ id:BLOCK.BLUE_WOOL, count:1 } },
+  { cat:'block', w:2, h:1, pattern:[BLOCK.WOOL_WHITE,ITEM.COAL], output:{ id:BLOCK.BLACK_WOOL, count:1 } },
+  { cat:'block', w:3, h:3, pattern:[null,BLOCK.GLASS,null,BLOCK.GLASS,BLOCK.TORCH,BLOCK.GLASS,null,BLOCK.GLASS,null], output:{ id:BLOCK.LAMP, count:1 } },
+
   { cat:'food', w:3, h:3, pattern:[ITEM.WHEAT,ITEM.WHEAT,ITEM.WHEAT,ITEM.WHEAT,ITEM.WHEAT,ITEM.WHEAT,ITEM.WHEAT,ITEM.WHEAT,ITEM.WHEAT], output:{ id:BLOCK.HAY_BALE, count:1 } },
   { cat:'food', w:1, h:3, pattern:[ITEM.WHEAT,ITEM.WHEAT,ITEM.WHEAT], output:{ id:ITEM.BREAD, count:1 } },
   { cat:'food', w:3, h:3, pattern:[ITEM.GOLD_INGOT,ITEM.GOLD_INGOT,ITEM.GOLD_INGOT,ITEM.GOLD_INGOT,ITEM.APPLE,ITEM.GOLD_INGOT,ITEM.GOLD_INGOT,ITEM.GOLD_INGOT,ITEM.GOLD_INGOT], output:{ id:ITEM.GOLDEN_APPLE, count:1 } }
@@ -3029,12 +3131,20 @@ const SMELT_RECIPES = {
   [BLOCK.CLAY]: BLOCK.BRICKS,
   [ITEM.RAW_BEEF]: ITEM.COOKED_BEEF,
   [ITEM.RAW_MUTTON]: ITEM.COOKED_MUTTON,
-  [BLOCK.OAK_LOG]: ITEM.COAL
+  [BLOCK.OAK_LOG]: ITEM.COAL,
+  [ITEM.ROTTEN_FLESH]: ITEM.COOKED_BEEF,
+  [BLOCK.STONE]: BLOCK.SMOOTH_STONE,
+  [BLOCK.STONE_BRICKS]: BLOCK.CRACKED_STONE_BRICKS,
+  [BLOCK.SANDSTONE]: BLOCK.SMOOTH_SANDSTONE,
+  [BLOCK.MUD]: BLOCK.TERRACOTTA
 };
 
 const FUEL_VALUES = {
   [ITEM.COAL]: 40, [BLOCK.COAL_ORE]: 25, [BLOCK.OAK_LOG]: 15, [BLOCK.OAK_PLANKS]: 12,
-  [ITEM.STICK]: 5, [BLOCK.CRAFTING_TABLE]: 12, [BLOCK.BOOKSHELF]: 12
+  [ITEM.STICK]: 5, [BLOCK.CRAFTING_TABLE]: 12, [BLOCK.BOOKSHELF]: 12,
+  [BLOCK.CHEST]: 12, [BLOCK.HAY_BALE]: 30, [BLOCK.WOOL_WHITE]: 4, [BLOCK.CACTUS]: 4,
+  [BLOCK.TORCH]: 4, [BLOCK.OAK_LEAVES]: 2,
+  [BLOCK.COAL_BLOCK]: 360, [BLOCK.BIRCH_PLANKS]: 12, [BLOCK.DARK_PLANKS]: 12
 };
 
 class InventorySystem {
